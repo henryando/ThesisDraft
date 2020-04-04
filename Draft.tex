@@ -1,0 +1,308 @@
+\documentclass[12pt]{puthesis}
+%\documentclass[12pt,lot, lof, singlespace]{puthesis}
+%\newcommand{\printmode}{}
+
+% Front page materials
+\title{Spectroscopic Characterization of New Er$^{3+}$ Host Crystals for Quantum Network Applications}
+\submitted{May 2020}  
+\copyrightyear{May 2020}  
+\author{Henry Allen Ando}
+\adviser{Professor Jeff D. Thompson}  
+\department{Physics}
+
+% Import packages
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{tikz}
+\usepackage{siunitx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[english]{babel}
+\usepackage[autostyle, english = american]{csquotes}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{paralist}
+\usepackage{cite} 
+\usepackage{multicol} 
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+\usepackage{physics}
+\setlength{\LTcapwidth}{\textwidth}
+
+% Set page geometry options
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue]{hyperref}
+\usepackage[margin=1in]{geometry}
+\setlength\parindent{28pt}
+\usepackage{setspace}
+\onehalfspacing
+
+% Define functions
+\newcommand{\erbium}[1][ ]{Er$^{3+}$#1}
+\newcommand{\YSO}[1][ ]{Y$_{2}$SiO$_{5}$#1}
+\newcommand{\ErYSO}[1][ ]{Er$^{3+}$:Y$_{2}$SiO$_{5}$#1}
+\newcommand{\TiO}[1][ ]{TiO$_{2}$#1}
+\newcommand{\supercite}[1]{$^{\text{\cite{#1}}}$}
+\graphicspath{{Figures/}}
+\newcommand{\notetoself}[1]{\textcolor{red}{#1}}
+
+% Tweak float placements
+\renewcommand{\topfraction}{0.85}  % max fraction of floats at top
+\renewcommand{\bottomfraction}{0.6}  % max fraction of floats at bottom
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}  % 2 may work better
+\setcounter{dbltopnumber}{2}  % for 2-column pages
+\renewcommand{\dbltopfraction}{0.66}  % fit big float above 2-col. text
+\renewcommand{\textfraction}{0.15}  % allow minimal text w. figs
+\renewcommand{\floatpagefraction}{0.66}	 % require fuller float pages
+\renewcommand{\dblfloatpagefraction}{0.66}  % require fuller float pages
+
+% Printed vs. online formatting
+\ifdefined\printmode
+\usepackage{url}
+\else
+\ifdefined\proquestmode
+\hypersetup{bookmarksnumbered}
+\makeatletter
+\hypersetup{pdftitle=\@title,pdfauthor=\@author}
+\makeatother
+\else
+\hypersetup{colorlinks,bookmarksnumbered}
+\makeatletter
+\hypersetup{pdftitle=\@title,pdfauthor=\@author}
+\makeatother
+\fi % proquest or online formatting
+\fi % printed or online formatting
+
+% Enable or disable front matter
+\ifodd 1
+\renewcommand*{\makecopyrightpage}{}
+\renewcommand*{\makeabstract}{}
+% \renewcommand{\maketitlepage}{}
+\else
+\abstract{\input{abstract}}
+\acknowledgements{\input{acknowledgements}}
+\dedication{To my parents.}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makefrontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introduction}
+\section{A Brief History of Quantum Computing}
+
+Humans have studied the stars since the beginning of recorded history, and the ancient Greeks were already wondering about the building blocks of reality. Thus, relative to astrophysics or particle physics, quantum computing could be considered a fairly new field. Quantum computers were originally proposed in the early 1980's as a means of simulating quantum many-body problems that are intractible on classical computers \cite{Feynman1982}. The groundwork of the theory was originally laid out largely by Benioff and Feynman \cite{Benioff1980,Feynman1982}. Toffoli created the first set of universal, reversible quantum logic gates \cite{Toffoli1980}. The no-cloning theorem, which states that \textit{qubits}\footnote{ Qubits, short for quantum bits, are two-element quantum spinors. Photon polarization and electron spin are common examples. A quantum computer has several qubits and performs unitary gates on them analogously } cannot be copied, was proved by Wootters and Zurek \cite{Wootters1982}. In 1985, Deutsch proposed the first model for a universal quantum computer \cite{Deutsch1985}.
+
+As the theory developed throughout the 1990's, theorists began to discover problems whose computational complexity could be vastly reduced on quantum computers. The first example, the Deutsch-Josza algorithm for determining whether a black-box function is either constant or balanced, is of little practical use but inspired many later such algorithms \cite{Deutsch1992}. Another important such discovery is Grover's algorithm for database searches, which offers a quadratic speedup over the classical version \cite{Grover1996}. Perhaps the most important of these discoveries, however, was Shor's algorithm (proposed in 1994), which provides an exponential speedup on the discrete logarithm and large integer factorization problems \cite{Shor1994}. Since most modern telecommunications\footnote{ and thus most of the internet.} are encrypted using RSA encryption schemes which rely on the difficulty of factorizing products of large prime numbers, a real quantum computer capable of running Shor's algorithm would instantly break the encryption on almost the entire internet. It was this discovery which catapulted the field of quantum computing from being an interesting physics experiment to a global arms race involving the governments of the United States and China,\footnote{ among others.} as well as tech companies such as Google, IBM, and Microsoft. 
+
+But while quantum computers threaten to break classical factorization-based encryption methods, they create in exchange the possibility for physically un-interceptible encrypted communication. The oldest and most famous of these so-called \emph{quantum cryptography} schemes is the BB84 protocol for quantum key distribution. This protocol, which encodes information in the polarization states of photons, enables one party to send a private key to another in such a way that any attempt to intercept the message would be detectable to the receiver \cite{Bennett2014,Shor2000}. Another uniquely quantum communication procedure is \emph{teleportation}. In quantum teleportation, a qubit is transmitted from one party to another instantaneously across arbitrarily large distances. This doesn't violate the lightspeed limit for the transfer of information, because a qubit isn't information, and because the protocol requires a classical bit to be exchanged beforehand anyway \cite{Bennett1993}. 
+
+\notetoself{Here is a potential spot to talk about error correction. However, I'm not sure it's worth the space/time. For the moment, I'll leave only this reminder.}
+
+Thus far, the theory of quantum algorithms and protocols has ranged far ahead of our ability to physically implement them. Over the years, a few broad classes of physical quantum computers have emerged as the most promising, each for slightly different types of problems. A few of these classes are:
+\newcommand{\listheader}[1]{\textbf{#1}}
+\begin{itemize}
+  
+\item \listheader{Trapped ion quantum computers} use the electronic spins of ions trapped in an optical lattice as the qubit \cite{Cirac1995}. Alternatively, trapped neutral atoms can be used, with nuclear spins as the qubits \notetoself{[?]}. The dipole-dipole interactions between adjacent particles can be tuned to perform two-qubit gates, thus making atom trap quantum computers a viable platform for a universal quantum computer \notetoself{[?]}.
+  
+\item \listheader{Nuclear magnetic resonance (NMR) quantum computers} use the nuclear spins of atoms or molecules dissolved in solution as the qubit \cite{Cory1997}. Unfortunately, it was shown after a few seemingly successful bulk NMR demonstrations that no entanglement had actually occurred in these experiments, and that entangelement is a necessary part of most important quantum algorithms \cite{Braunstein1999,Linden2001}. 
+  
+\item \listheader{Solid-state atoms and atom-like defects} such as rare earth ions or nitrogen-vacancy (NV) centers in crystals are in some sense descendents of NMR-based quantum computing paradigms \notetoself{[?]}. In these systems, the spin states of valence electrons serve as qubits. Light-matter interfaces can be achieved by coupling these atoms with photons at the same energy as an optical transition in the qubit atom \notetoself{[?]}. 
+
+\item \listheader{Linear optical quantum computers} use the polarization states of photons as qubits \cite{Knill2001}. The main advantage of this paradigm is that it enables easy transfer of qubits over long distance, because the computational qubits can be sent directly over long distances, either through fiber optic cables or through free space telescopes, with no extra conversion step. 
+    
+\item \listheader{Superconducting circuit quantum computers} use the phase differences across superconducting Josephson junctions as qubits \cite{Nakamura1999}. These types of computers have so far been the largest, with Google claiming to demonstrate \emph{quantum supremacy} (the ability of a quantum computer to solve a problem faster than a classical counterpart) for the first time on a 53-qubit superconducting quantum computer in 2019 \cite{Arute2019}.
+  
+\end{itemize}
+
+\notetoself{At this point, I should debrief the different paradigms, then talk about why we would like telecom single-photon sources, quantum memories, and light-matter interfaces (quantum networks, modular quantum computing, quantum repeaters). What exactly are we proposing to use this system for?}
+
+\section{\erbium in crystals as a technology for quantum networks }
+
+\begin{itemize}
+\item Single atoms and atom-like defects have been promising for lots of tasks relating to quantum networks (list)
+
+\item Critical issue: want telecom wavelength photons to avoid crippling losses in optical fibers
+
+\item Erbium is good for this purpose because it has a telecom wavelength transition 
+  
+\item But this transition is slow - 100 Hz - which would be crippling
+  
+\item Embedding in crystal and coupling to silicon nanophotonic cavity results in Purcell enhancement of the emission rate by 600 times.
+
+\item But this work used YSO which has strong nuclear spins, resulting in low coherence times (bad for quantum memories). Other flaws: bulk doped too high concentration, different crystal geometry could increase emission rate due to orbital mixing 
+  
+\item Hence the search for new host crystals. Criteria: support silicon nanophotonics (not my job), Erbium can be implanted and is visible, coherence times are better...anything else?
+  
+\item Implanted Erbium in lots of plausible crystals...but now we have to see whether it worked! Where are the lines? How bright and broad are they? What can we learn about how Erbium is sitting in the crystals?
+  
+\item Discussion of homogeneous vs. inhomogeneous broadening 
+  
+\end{itemize}
+
+
+\section{Spectroscopic Properties of \erbium in Solid State Hosts}
+
+What are the states we're addressing? What sort of selection rules do we expect? What are the qubit states? 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Methods}
+
+\section{Sample preparation}
+
+\subsection{Ion implantation}
+
+\subsection{Annealing}
+
+\section{Photoluminescence excitation spectroscopy}
+\begin{itemize}
+\item Why PLE? What can you measure, and what can you learn from those measurements?
+
+\item How does our PLE setup work?
+
+\item What limits our ability to measure smaller signals?
+\end{itemize}
+
+\section{Emission spectroscopy with an array detector}
+
+\begin{itemize}
+\item Why measure emission spectra? Why take 2D spectra? What can you learn from these measurements that you couldn't from just excitation spectroscopy?
+
+\item How does the spectrometer work? 
+
+\item What limits our ability to measure smaller signals with the commercial spectrometer? Why do we think Fourier transform spectroscopy could improve our ability to detect smaller signals?
+
+\item There are other advantages as well - increased range, potentially increased resolution (with larger mirror travel), no need to focus through slit. Putting FT on the excitation side with a broad spectrum source could actually give a way to do 2D spectra over extremely wide regions.
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Characterization of new hosts}
+
+\section{Theoretical background}
+
+\subsection{Crystal fields}
+\begin{itemize}
+  
+\item How do crystal fields affect the energy levels of implanted ions?
+
+\item Spherical harmonics
+
+\item Crystal symmetries 
+
+\item Anything else to include here?
+
+\item Cubic crystals
+\end{itemize}
+
+
+\subsection{Peak finding and assignment}
+
+How do we identify peaks? How do we assign lines to the different transitions?
+
+
+\section{Results}
+
+Roughly one to two pages for each material, including:
+
+\begin{itemize}
+\item 2D spectrum
+
+\item Table of peak locations
+
+\item Table of proposed energy levels
+
+\item Picture of crystal structure
+
+\item Crystal field parameters (if applicable - probably only MgO)
+
+\item Any additional commentary (unusual lineshapes, etc.)
+
+\item Discussion of potential usefulness for single photon applications 
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Design of a low-cost, high-resolution Fourier transform spectrometer}
+
+\section{Motivation}
+
+
+
+\section{Design}
+
+\subsection{Principles of Fourier transform spectroscopy}
+\begin{itemize}
+\item A small diagram of how FT spectroscopy works at the simplest level, and a discussion of how data is collected and processed
+
+\item What determines resolution? Range?
+
+\item How does noise work propagate through the Fourier Transform?
+
+\item What is the minimum sampling rate? How do we determine this rate? Nyquist Theorem and DFT 
+
+\item Why use Hann window in Fourier Tranform?
+\end{itemize}
+
+\subsection{Implementation}
+\begin{itemize}
+\item Optical design of our FT spectrometer 
+
+\item Alignment precision and contrast
+
+\item Data collection electronics 
+
+\item Data processing 
+\end{itemize}
+
+\subsection{Characterization}
+\begin{itemize}
+\item Resolution
+
+\item Signal to noise 
+
+\item Future characterization, which was blocked due to coronavirus 
+
+\item Will this be a useful part of the experiment?
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusions}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\singlespacing
+\bibliographystyle{prsty}
+\cleardoublepage
+\ifdefined\phantomsection
+  \phantomsection  % makes hyperref recognize this section properly for pdf link
+\else
+\fi
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{thesis}
+
+\end{document}

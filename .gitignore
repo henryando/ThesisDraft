@@ -1,0 +1,8 @@
+*~
+*.aux
+Draft.pdf
+*.log
+*.toc
+*.blg
+*.bbl
+auto/*
