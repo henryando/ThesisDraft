@@ -6,3 +6,4 @@ Draft.pdf
 *.blg
 *.bbl
 auto/*
+*.out
