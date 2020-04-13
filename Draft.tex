@@ -128,35 +128,33 @@ Thus far, the theory of quantum algorithms and protocols has ranged far ahead of
   
 \end{itemize}
 
-Although superconducting circuit quantum computers have been the most successful so far in terms of implementing complicated quantum algorithms, they are not useful for quantum networks applications. Linear optical quantum computers are the best suited for working purely with photonic qubits in quantum networks, but without the superior computing power offered by superconducting circuits can only implement fairly simple tasks. Thus, point defects in solid state hosts are a very exciting platform, as they offer the possibility of light-matter interfaces that could marry the power of superconducting circuit computers with the distance allowed by photons. This would enable a variety of exciting quantum technologies, such as quantum cryptography, quantum-enhanced metrology, and modular quantum computing.
+Although superconducting circuit quantum computers have been the most successful so far in terms of implementing complicated quantum algorithms, they are not so useful for quantum networks applications. Linear optical quantum computers are the best suited for working purely with photonic qubits in quantum networks, but without the superior computing power offered by superconducting circuits can only implement fairly simple tasks. Thus, point defects in solid state hosts are a very exciting platform, as they offer the possibility of light-matter interfaces that could marry the power of superconducting circuit computers with the distance allowed by photons. This would enable a variety of exciting quantum technologies, such as quantum cryptography, quantum-enhanced metrology, and modular quantum computing \cite{Monroe2014}.
 
 \section{\erbium in crystals as a technology for quantum networks }
 
-\begin{itemize}
-\item Single atoms and atom-like defects have been promising for lots of tasks relating to quantum networks (list)
+Single atoms and atom-like defects in crystals have successfully demonstrated a variety of quantum-network-related tasks. Examples include spin-photon entanglement in quantum dots \cite{Greve2012}, entanglement between trapped atoms and photons \cite{Blinov2004}, teleportation between remote trapped atom memories \cite{Nolleke2013}, and spin-photon entanglement using vacancy centers in diamonds \cite{Togan2010}. However, most existing systems use photons in the visible or near-infrared spectrum. For long-distance quantum communications over optical fibers, such photons would suffer crippling losses (on the order of several dB/km). One approach to countering these losses it to use a satellite uplink instead of optical fibers \cite{Yin2017}. However, for a majority of applications a satellite is impractical, and substantial fiber optic infrastructure already exists across the country. Single \erbium ions are thus a very promising qubit for quantum network applications, as they naturally have an optical transition at 1550 nm, the so-called ``telecom'' wavelength where losses in fibers drop to 0.2 dB/km.
 
-\item Critical issue: want telecom wavelength photons to avoid crippling losses in optical fibers
+This transition, however, is very slow, with a natural linewidth on the order of 100 Hz. For many quantum networking applications, this would be crippling. The relevant times bins for creating indistinguishable photons are on the order of femtoseconds. Even less stringent standards, like the coherence times of many types of qubits, are less than milliseconds. For \erbium based technologies to be viable, their repetition rates need to be increased. 
 
-\item Erbium is good for this purpose because it has a telecom wavelength transition 
-  
-\item But this transition is slow - 100 Hz - which would be crippling
-  
-\item Embedding in crystal and coupling to silicon nanophotonic cavity results in Purcell enhancement of the emission rate by 600 times.
 
-\item But this work used YSO which has strong nuclear spins, resulting in low coherence times (bad for quantum memories). Other flaws: bulk doped too high concentration, different crystal geometry could increase emission rate due to orbital mixing 
-  
-\item Hence the search for new host crystals. Criteria: support silicon nanophotonics (not my job), Erbium can be implanted and is visible, coherence times are better...anything else?
-  
-\item Implanted Erbium in lots of plausible crystals...but now we have to see whether it worked! Where are the lines? How bright and broad are they? What can we learn about how Erbium is sitting in the crystals?
-  
-\item Discussion of homogeneous vs. inhomogeneous broadening 
-  
-\end{itemize}
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Nanophotonics}
+  \caption{A lensed fiber couples into a silicon photonic cavity stamped on top of an \erbium[]-doped \YSO crystal. Red arrows represent the spins of \erbium ions in the crystal substrate. Figure from \cite{Dibos2017}.}
+  \label{fig:cavity}
+\end{figure}
 
+
+Previous work by the Thompson lab has shown that by stamping silicon nanophotonic cavities on top of crystals doped with \erbium ions, the emission rate can be enhanced by 600 times via the Purcell effect \cite{Dibos2017}. Figure \ref{fig:cavity} shows a graphic of this scheme. This approach is very promising - however, the crystal substrate could be improved in numerous ways. For one thing, this work used \YSO[], a crystal with relatively strong nuclear spins. These nuclear spins substantially limit the coherence times of the \erbium spin qubits embedded in the crystal. Another other issue is that the density of \erbium ions is high enough in the bulk-doped \YSO that tens to hundreds of ions couple to the cavity, preventing simple frequency-based resolution of the different ions each cavity couples to, and reducing coherence times further due to electric dipole interactions between nearby \erbium ions. Finally, a different crystal field configuration could potentially increase the emission rate further, by increasing the matrix element between the ground and excited state wavefunctions.\footnote{The \erbium telecom transition is electric dipole forbidden. Small perturbations to the electronic wavefunctions can thus make substantial relative differences to the matrix element between the ground and excited states. The spectroscopic properties of \erbium are discussed in more detail in Section \ref{sec:spectr-prop-erbi}.}
+
+Unfortunately, using bulk doping methods it is impossible to grow crystals with lower concentrations of \erbium than in this previous work \cite{Dibos2017}. The Thompson lab has thus turned to ion implantation to achieve lower doses of \erbium in new potential crystal hosts.\footnote{Ion implantation is a process by which ions are accelerated into the surface of a crystal, and become lodged in the structure of the crystal. More information on this process is given in Section } Last fall, it was shown that \erbium could be successfully implanted in \TiO[], a crystal with low nuclear spins, with narrow optical linewidths \cite{Phenicie2019}. \notetoself{Given that \TiO worked, why continue searching? Not super clear on this myself. Does it have to do with attaching photonic crystals?}
+
+In the interests of discovering potentially more optimal host crystals, a large batch of crystals was implanted with \erbium ions. For all these implanted crystals, it was necessary to determine experimentally whether \erbium was visible in the crystal, and if so, to determine its spectral properties to begin understanding how \erbium ions in this crystal would perform as single photon emitters. Where are the emission and excitation lines? How bright and broad are they? What can we learn about how the \erbium ions are sitting in the crystal lattice? These are the questions that motivate this work.
 
 \section{Spectroscopic Properties of \erbium in Solid State Hosts}
+\label{sec:spectr-prop-erbi}
 
-What are the states we're addressing? What sort of selection rules do we expect? What are the qubit states? 
+\notetoself{What are the states we're addressing? What sort of selection rules do we expect? What are the qubit states? Discussion of homogeneous vs. inhomogeneous broadening }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -165,12 +163,17 @@ What are the states we're addressing? What sort of selection rules do we expect?
 \chapter{Methods}
 
 \section{Sample preparation}
+\label{sec:sample-preparation}
 
 \subsection{Ion implantation}
+\label{sec:ion-implantation}
 
 \subsection{Annealing}
+\label{sec:annealing}
 
 \section{Photoluminescence excitation spectroscopy}
+\label{sec:phot-excit-spectr}
+
 \begin{itemize}
 \item Why PLE? What can you measure, and what can you learn from those measurements?
 
@@ -180,6 +183,7 @@ What are the states we're addressing? What sort of selection rules do we expect?
 \end{itemize}
 
 \section{Emission spectroscopy with an array detector}
+\label{sec:emiss-spectr-with}
 
 \begin{itemize}
 \item Why measure emission spectra? Why take 2D spectra? What can you learn from these measurements that you couldn't from just excitation spectroscopy?
