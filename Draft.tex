@@ -154,8 +154,33 @@ In the interests of discovering potentially more optimal host crystals, a large 
 \section{Spectroscopic Properties of \erbium in Solid State Hosts}
 \label{sec:spectr-prop-erbi}
 
-\notetoself{What are the states we're addressing? What sort of selection rules do we expect? What are the qubit states? Discussion of homogeneous vs. inhomogeneous broadening }
+Due to its telecom optical transition, \erbium has a long history of use as a dopant to make telecom wavelength fiber amplifiers.\footnote{Our spectroscopy experiment, in fact, uses an erbium-doped fiber amplifier (EDFA).} This optical transition is between the $^{4}I_{15/2}$ ground state, and an excited state $^{4}I_{13/2}$. There are two consequences to this. One is that, because these $4f$ states lie closer to the nucleus than some $5d$ which populate earlier, they are relatively shielded from phonons in the crystal. This makes \erbium and other rare-earth ions with this property desirable for building quantum memories, as the coherence times of the optical electrons are unusually good. The second consequence is that this transition is electric-dipole forbidden, as the total angular momentum $L$ is the same in the ground and excited states. This means that the transition is quite slow, with excited state lifetimes on the order of ten milliseconds (as previously discussed). For quantum network applications, this is less than desirable, and one of the principal motivations for the use of silicon photonic cavities. 
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.48\textwidth]{EnergyLevelDiagram}
+  \caption{Diagram showing the Stark splitting due to electric fields within the crystal (blue) and the Zeeman splitting in an applied magnetic field (green). The transition between the lowest ground and excited state levels, labelled in red, typically falls around 1530 nm.}
+  \label{fig:energyleveldiagram}
+\end{wrapfigure}
+
+Both the ground state and the excited state are degenerate, 16- and 14-fold respectively. In solid state hosts, the crystal fields split these degeneracies via the Stark effect into $J+1/2$ Kramer's doublets. We label the ground state Stark-shifted doublet states with $Z_{1}$ to $Z_{8}$, and the excited state doublets with $Y_{1}$ to $Y_{7}$. In the presence of an applied magnetic field, these doublets themselves are split by the Zeeman effect, and the energy levels can become entirely nondegenerate. This splitting is shown in Figure \ref{fig:energyleveldiagram}. In this work, we ignore the Zeeman splitting, and focus on identifying how the electric field inside the crystal environment shifts the energy levels. 
+
+Because the excited state lifetime of this system is so long, the natural linewidth is quite small. As a result, at low temperatures, the primary line broadening is inhomogeneous, a consequence of slight variations in the locations of different \erbium ions in the crystal, or slight deformations of the crystal field around them.
+
+
+\section{Crystal fields}
+\begin{itemize}
+  
+\item How do crystal fields affect the energy levels of implanted ions?
+
+\item Spherical harmonics
+
+\item Crystal symmetries 
+
+\item Anything else to include here?
+
+\item Cubic crystals
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -201,24 +226,7 @@ In the interests of discovering potentially more optimal host crystals, a large 
 
 \chapter{Characterization of new hosts}
 
-\section{Theoretical background}
-
-\subsection{Crystal fields}
-\begin{itemize}
-  
-\item How do crystal fields affect the energy levels of implanted ions?
-
-\item Spherical harmonics
-
-\item Crystal symmetries 
-
-\item Anything else to include here?
-
-\item Cubic crystals
-\end{itemize}
-
-
-\subsection{Peak finding and assignment}
+\section{Peak finding and assignment}
 
 How do we identify peaks? How do we assign lines to the different transitions?
 
