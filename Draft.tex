@@ -215,12 +215,35 @@ where $O_{4}^{0}$, $O_{4}^{4}$, $O_{6}^{0}$ and $O_{6}^{4}$ are $2J+1$ dimension
 \subsection{Annealing}
 \label{sec:annealing}
 
+
+\subsection{Polishing and photonic crystals}
+\label{sec:polishing}
+
 \section{Photoluminescence excitation spectroscopy}
 \label{sec:phot-excit-spectr}
 
 Photoluminescence excitation spectroscopy (PLE) is a spectroscopy technique wherein the sample is exposed to a tunable excitation laser, and the fluorescence from the sample is collected and measured. In principle, it measures the same physical properties as absorption spectroscopy. However, it is more effective for detecting extremely small doses of a material (as we are dealing with here) because rather than measuring a small signal against a large background, it measures a small signal against almost no background.
 
-Our PLE setup is shown in Figure \notetoself{gotta make figure.}. A tunable diode laser is amplified by an erbium-doped fiber amplifier up to \notetoself{200 mW?}. The laser is then passed through a chopper. The 
+PLE spectroscopy measures how much light the sample can absorb and reemit at each wavelength in a scan. Physically, this corresponds to measuring the difference between the energies between the occupied ground states and the energies of the excited states. In theory, there will be excitation peaks at every energy $E_{nm}$ for which there is a transition 
+\begin{equation}\label{eq:6}
+E_{nm} = Y_{m}-Z_{n}.
+\end{equation}
+However, the relative strengths of these peaks are modulated by several factors. At different temperatures, the ground states will have different occpancies according to the Boltzmann distribution. The matrix elements between different $Z$ and $Y$ level states can be greater or lesser, which will influence the brightness of the observed transition. Finally, the linewidths of the transitions affect their brightnesses. When the natural linewidth is much smaller than the inhomogeneous linewidth due to environmental factors, only a small fraction of the ions are addressed by the laser at a given moment. On the other hand, as the natural linewidth increases, the excitation efficiency falls, and the line can also become weaker. The balance of these forces can be be unpredictable. Moreover, the laser power is not consistent across all wavelengths due to wavelength-dependent changes in the polarization. Thus, it is currently difficult to draw precise quantitative conclusions based on the relative heights of different excitation peaks. 
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\textwidth]{PLESetupDiagram.pdf}
+  \caption{Schematic of our spectroscopy experiment. A half-wave plate is marked in blue, and a dichroic mirror is marked in green. }
+  \label{fig:ple}
+\end{figure}
+
+Our PLE setup is shown in Figure \ref{fig:ple}. A tunable diode laser is amplified by an erbium-doped fiber amplifier up to \notetoself{200 mW?}. The laser is then passed through a chopper. A half-wave plate (blue) at the output of the fiber enables coarse control over the polarization of the laser before it passes through a polarizing beamsplitter. A photodiode measures the light rejected by the PBS, informing the rotation of the HWP. The laser then passes through a beam expander consisting of two lenses, before reflecting off a PBS towards the vapor cryostat containing the sample. Before the cryostat the laser passes through a lens which focuses it onto the sample surface. A camera, which is added to the beam path with a dichroic (green), helps aim the laser at the sample.
+
+The reflected excitation laser is mostly rejected from continuing down the measurement beampath by virtue of the PBS. Fluorescence from the sample, which has random polarization, makes it through this PBS with 50\% attenuation. The measurement beampath is then directed either to a low-noise photodiode, or to the array detector spectrometer, by inserting or removing a mirror (dotted line). Before measurement, the light passes through a second chopper set to be exactly out of phase with the first, so that residual excitation light is further rejected.\footnote{Since the excitated state lifetime of the \erbium ions is on the order of ms, fluorescent emission continues to be visible for several ms after the excitation laser is blocked.}
+
+When the light is directed into the low-noise photodiode, we are performing pure PLE spectroscopy. There are two modes in which this can be operated. By directing the PD signal to a lock-in amplifier tuned to the frequency of the chopper, we can achieve an extremely low signal-to-noise ratio. This enables the measurement of the smallest signals we can observe with this setup. Alternatively, the PD output can be measured directly, enabling direct observation of the decay of the fluorescence, and thus the excited state lifetime.
+
+In the next section, we discuss the array detector spectrometer and the measurements performed when the signal is instead directed into the other beam path.
 
 \begin{itemize}
 \item Why PLE? What can you measure, and what can you learn from those measurements?
