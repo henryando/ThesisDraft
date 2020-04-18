@@ -248,6 +248,14 @@ In the next section, we discuss the array detector spectrometer and the measurem
 \section{Emission spectroscopy with an array detector}
 \label{sec:emiss-spectr-with}
 
+Emission spectroscopy is a different form of fluorescence spectroscopy, where instead of scanning the wavelength of the excitation laser, you measure the frequency composition of the fluorescence itself. In our experiment, this is done by focusing the fluorescence into a thin slit, which spatially separates the different wavelengths of light, and then imaging this spatial spectrum onto an array of photodetectors. Thus the readout of each bin of the array detector corresponds to the emission at a different wavelength of light.
+
+The emission spectrum is different from the excitation spectrum, due primarily to the fact that higher energy states have lower occupation at lower temperatures. In principle, all of the same transitions are visible; however, while the $Z_{1}Y_{1}$ and $Z_{1}Y_{2}$ transitions might appear equally bright while performing excitation spectroscopy, the former might be substanitally brighter when performing emission spectroscopy if the thermal occupation of $Y_{1}$ is substantially higher than $Y_{2}$. Thus, the emission and excitation spectra might look very different, especially at low temperatures.
+
+This is why it can be advantageous to measure both at the same time. By measuring the emission spectrum for a range of different excitation wavelengths, a so-called ``2D spectrum'' can be obtained. Especially in situations where \erbium is sitting at multiple different sites in the crystal and thus multiple spectra are accessible, this additional dimension of resolution can be helpful in distinguishing the different spectra.
+
+
+
 \begin{itemize}
 \item Why measure emission spectra? Why take 2D spectra? What can you learn from these measurements that you couldn't from just excitation spectroscopy?
 
@@ -295,8 +303,13 @@ Roughly one to two pages for each material, including:
 
 \section{Motivation}
 
+\begin{itemize}
+\item What limits our ability to measure smaller signals with the commercial spectrometer? Why do we think Fourier transform spectroscopy could improve our ability to detect smaller signals?
 
+\item There are other advantages as well - increased range, potentially increased resolution (with larger mirror travel), no need to focus through slit. Putting FT on the excitation side with a broad spectrum source could actually give a way to do 2D spectra over extremely wide regions.
+\end{itemize}
 
+  
 \section{Design}
 
 \subsection{Principles of Fourier transform spectroscopy}
