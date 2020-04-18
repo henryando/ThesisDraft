@@ -154,7 +154,7 @@ In the interests of discovering potentially more optimal host crystals, a large 
 \section{Spectroscopic Properties of \erbium in Solid State Hosts}
 \label{sec:spectr-prop-erbi}
 
-Due to its telecom optical transition, \erbium has a long history of use as a dopant to make telecom wavelength fiber amplifiers.\footnote{Our spectroscopy experiment, in fact, uses an erbium-doped fiber amplifier (EDFA).} This optical transition is between the $^{4}I_{15/2}$ ground state, and an excited state $^{4}I_{13/2}$. There are two consequences to this. One is that, because these $4f$ states lie closer to the nucleus than some $5d$ which populate earlier, they are relatively shielded from phonons in the crystal. This makes \erbium and other rare-earth ions with this property desirable for building quantum memories, as the coherence times of the optical electrons are unusually good. The second consequence is that this transition is electric-dipole forbidden, as the total angular momentum $L$ is the same in the ground and excited states. This means that the transition is quite slow, with excited state lifetimes on the order of ten milliseconds (as previously discussed). For quantum network applications, this is less than desirable, and one of the principal motivations for the use of silicon photonic cavities. 
+Due to its telecom optical transition, \erbium has a long history of use as a dopant to make telecom wavelength fiber amplifiers.\footnote{Our spectroscopy experiment, in fact, uses an erbium-doped fiber amplifier (EDFA).} This optical transition is between the $^{4}I_{15/2}$ ground state, and an excited state $^{4}I_{13/2}$. This notation, known as spectroscopic notation, takes the form $^{2S+1}L_{J}$, where $S$ is the total spin momentum, $L$ is the total orbital momentum (specified as a letter, $S, P, D,$ etc., where $I$ corresponds to a total orbital momentum of 6), and $J$ is the total angular momentum. 
 
 \begin{wrapfigure}{r}{0.5\textwidth}
   \centering
@@ -163,12 +163,53 @@ Due to its telecom optical transition, \erbium has a long history of use as a do
   \label{fig:energyleveldiagram}
 \end{wrapfigure}
 
+There are two consequences to this. One is that, because these $4f$ states lie closer to the nucleus than the $5d$ states which populate earlier, they are relatively shielded from phonons in the crystal. This makes \erbium and other rare-earth ions with this property desirable for building quantum memories, as the coherence times of the optical electrons are unusually good. The second consequence is that this transition is electric-dipole forbidden, as the total angular momentum $L$ is the same in the ground and excited states. This means that the transition is quite slow, with excited state lifetimes on the order of ten milliseconds (as previously discussed). For quantum network applications, this is less than desirable, and one of the principal motivations for the use of silicon photonic cavities. 
+
 Both the ground state and the excited state are degenerate, 16- and 14-fold respectively. In solid state hosts, the crystal fields split these degeneracies via the Stark effect into $J+1/2$ Kramer's doublets. We label the ground state Stark-shifted doublet states with $Z_{1}$ to $Z_{8}$, and the excited state doublets with $Y_{1}$ to $Y_{7}$. In the presence of an applied magnetic field, these doublets themselves are split by the Zeeman effect, and the energy levels can become entirely nondegenerate. This splitting is shown in Figure \ref{fig:energyleveldiagram}. In this work, we ignore the Zeeman splitting, and focus on identifying how the electric field inside the crystal environment shifts the energy levels. 
 
 Because the excited state lifetime of this system is so long, the natural linewidth is quite small. As a result, at low temperatures, the primary line broadening is inhomogeneous, a consequence of slight variations in the locations of different \erbium ions in the crystal, or slight deformations of the crystal field around them.
 
 
 \section{Crystal fields}
+
+The problem of modeling the effects of crystal fields on the spectra of ions is an old one, and tools exist for approaching it. First, we make use of the central field approximation, which roughly states that the repulsive potential an electron feels due to the other electrons is spherically symmetric. Thus the radial component of the wavefunctions decouples from the angular component, and focus can be turned to the angular component. The key idea underlying crystal field modelling is then decomposing the electric field of the crystal into a sum of spherical harmonics centered on the atom whose perturbations you are trying to measure. In other words, the crystal field hamiltonian is expressed as 
+\begin{equation}\label{eq:3}
+  H_{CF} = \sum_{k, q}B_{q}^{k}C_{q}^{(k)},
+\end{equation}
+where $B_{q}^{k}$ are parameters to describe how much of each spherical harmonic is present, and $\mathbf{C}^{(k)}$ are the tensor operators of spherical harmonics \cite{Liu2006}.
+
+The next step is to pick a basis of quantum numbers for describing the angular component of the wavefunctions. The true good quantum numbers in general depend on the relative strength of the electrostatic forces in the atom versus the spin-orbit coupling. However, since the crystal field perturbation will take the form of spherical harmonics, it makes sense to use a basis of simple spherical harmonic wavefunctions. Thus, we use the basis $\ket{l\tau SLJM}$, where $l$ has to do with the radial part of the wavefunction $nl$, $S$ is the total spin momentum, $L$ is the total orbital momentum, $J$ is the total angular momentum $S+L$, and $M$ is the ``magnetic quantum number'' ranging from $-J,-J+1,...,J$, and $\tau$ is a seniority number to distinguish states with the same $S$ and $L$ which can't be otherwise distinguished \cite{Liu2006}.
+
+Having decided on a basis, we do perturbation theory with the crystal field Hamiltonian. This involves computing the matrix elements, which are given by
+\begin{equation}\label{eq:4}
+  \bra{l\tau SLJM} H_{CF} \ket{l\tau' S'L'J'M'} = \sum_{k, q} B_{q}^{k}(-1)^{J-M}\Bigg(\begin{array}{c c c}J & k & J' \\ -M & q & M'\end{array}\Bigg)D_{J}^{k},
+\end{equation}
+where
+\begin{align}
+  D_{J}^{k} =
+  & (-1)^{S+L'+J+k}[(2J+1)(2J'+1)]^{1/2}
+    \Bigg\{\begin{array}{c c c} J & J' & k \\ L' & L & S \end{array}\Bigg\} \nonumber \\
+  & \times \bra{l\tau S L } \mathbf{U}^{(k)}\ket{l\tau' S' L'}(-1)^{l}(2l + 1)
+    \Bigg(\begin{array}{c c c} l & k & l \\ 0 & 0 & 0\end{array}\Bigg) \label{eq:5}                                                               
+\end{align}
+In the above equations, the $()$ and $\{\}$ quantities are 3- and 6-$j$ symbols, a notatation for representing Clebsh-Gordan coefficients. The $\mathbf{U}^{(k)}$ operator is the reduced matrix element of a unit tensor (see \cite{Wybourne1965} for more information). The key conclusion is that these matrix elements can be evaluated exactly and reduced to known linear combinations of the crystal field parameters $B_{q}^{k}$. Calculating the spectrum for a given set of crystal field is then only a matter of diagonalizing the matrix of the crystal field Hamiltonian. As a consequence, if the number of known energy levels is more than the number of unknown crystal field parameters, the crystal field parameters can be found conclusively.
+
+In general, the number of crystal field parameters is infinite. However, various symmetries of the crystal can eliminate many of the possible parameters. For example, if the rare earth ion sees a crystal environment with cubic symmetry, only four crystal field parameters can be nonzero, $B_{4}^{0}$, $B_{4}^{4}$, $B_{6}^{0}$, and $B_{6}^{4}$, and only two of these are actually independent. Thus the problem is a two-parameter one. Lea, Leask and Wolf show an efficient way of calculating the crystal field matrix for diagonalization, 
+\begin{equation}\label{eq:7}
+  H = B_{4}(O_{4}^{0}+ 5\cdot O_{4}^{4}) + B_{6}(O_{6}^{0}-21\cdot O_{6}^{4}),
+\end{equation}
+where $O_{4}^{0}$, $O_{4}^{4}$, $O_{6}^{0}$ and $O_{6}^{4}$ are $2J+1$ dimensional constant matrices (for their exact form see \cite{Lea1962}). The upshot of this for our purposes is that the crystal field environment that \erbium ions experience in MgO, a crystal with cubic symmetry, could potentially be determined precisely. In Section \ref{sec:mgo} we take up this task.
+
+% The good quantum numbers depend on the relative strength of spin-orbit interactions and electrostatic interactions. In the case of rare earth ions, the two types of interactions are comparably strong, and the appropriate basis of good quantum numbers is $J$ and $M$, the total angular momentum operator and the ``magnetic quantum number'' $M=-J, -J+1,...,J$. A basis of $JM$ eigenstates for these quantum numbers can be computed by starting from the standard $LS$ basis of eigenstates, then treating them to first order in perturbation theory. The resulting eigenstates are independent of $M$ (and therefore $2J+1$-fold degenerate), and consist of linear combinations of $LS$ eigenstates with $L+S=J$:
+% \begin{equation}\label{eq:1}
+% \Psi(nlJ) = \sum_{\tau L S}a_{\tau L S J}\ket{nl\tau L S J},
+% \end{equation}
+% where 
+% \begin{equation}\label{eq:2}
+% a_{\tau L S J} = \sum_{\tau'L'S'}\bra{nl\tau L S J }   H_{C} + H_{SO}   \ket{nl\tau'L'S'J'} \delta_{JJ'}.
+% \end{equation}
+% In the above equations, $H_{C}$ is the central field Hamiltonian, $H_{SO}$ is the spin-orbit Hamiltonian, $nl$ is the label for the radial part of the wavefunction, and $\tau$ is an additional ``seniority'' quantum number necessary for distinguishing states with the same values of $L$ and $S$. Further detail can be found in \cite{Liu2006}.
+
 \begin{itemize}
   
 \item How do crystal fields affect the energy levels of implanted ions?
@@ -199,6 +240,10 @@ Because the excited state lifetime of this system is so long, the natural linewi
 \section{Photoluminescence excitation spectroscopy}
 \label{sec:phot-excit-spectr}
 
+Photoluminescence excitation spectroscopy (PLE) is a spectroscopy technique wherein the sample is exposed to a tunable excitation laser, and the fluorescence from the sample is collected and measured. In principle, it measures the same physical properties as absorption spectroscopy. However, it is more effective for detecting extremely small doses of a material (as we are dealing with here) because rather than measuring a small signal against a large background, it measures a small signal against almost no background.
+
+Our PLE setup is shown in Figure \notetoself{gotta make figure.}. A tunable diode laser is amplified by an erbium-doped fiber amplifier up to \notetoself{200 mW?}. The laser is then passed through a chopper. The 
+
 \begin{itemize}
 \item Why PLE? What can you measure, and what can you learn from those measurements?
 
@@ -221,17 +266,16 @@ Because the excited state lifetime of this system is so long, the natural linewi
 \end{itemize}
 
 
+\section{Peak finding and assignment}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Characterization of new hosts}
 
-\section{Peak finding and assignment}
 
-How do we identify peaks? How do we assign lines to the different transitions?
-
-
-\section{Results}
+\subsection{MgO}
+\label{sec:mgo}
 
 Roughly one to two pages for each material, including:
 
