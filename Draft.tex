@@ -36,6 +36,7 @@
 \usepackage{wrapfig}
 \usepackage{adjustbox}
 \usepackage{physics}
+\usepackage{rotating}
 \setlength{\LTcapwidth}{\textwidth}
 
 % Set page geometry options
@@ -53,6 +54,7 @@
 \newcommand{\supercite}[1]{$^{\text{\cite{#1}}}$}
 \graphicspath{{Figures/}}
 \newcommand{\notetoself}[1]{\textcolor{red}{#1}}
+\newcommand{\wn}{cm$^{-1}$}
 
 % Tweak float placements
 \renewcommand{\topfraction}{0.85}  % max fraction of floats at top
@@ -103,6 +105,7 @@
 
 \chapter{Introduction}
 \section{A Brief History of Quantum Computing}
+\label{sec:brief-hist-quant}
 
 Humans have studied the stars since the beginning of recorded history, and the ancient Greeks were already wondering about the building blocks of reality. Thus, relative to astrophysics or particle physics, quantum computing could be considered a fairly new field. Quantum computers were originally proposed in the early 1980's as a means of simulating quantum many-body problems that are intractible on classical computers \cite{Feynman1982}. The groundwork of the theory was originally laid out largely by Benioff and Feynman \cite{Benioff1980,Feynman1982}. Toffoli created the first set of universal, reversible quantum logic gates \cite{Toffoli1980}. The no-cloning theorem, which states that \textit{qubits}\footnote{ Qubits, short for quantum bits, are two-element quantum spinors. Photon polarization and electron spin are common examples. A quantum computer has several qubits and performs unitary gates on them analogously } cannot be copied, was proved by Wootters and Zurek \cite{Wootters1982}. In 1985, Deutsch proposed the first model for a universal quantum computer \cite{Deutsch1985}.
 
@@ -131,6 +134,7 @@ Thus far, the theory of quantum algorithms and protocols has ranged far ahead of
 Although superconducting circuit quantum computers have been the most successful so far in terms of implementing complicated quantum algorithms, they are not so useful for quantum networks applications. Linear optical quantum computers are the best suited for working purely with photonic qubits in quantum networks, but without the superior computing power offered by superconducting circuits can only implement fairly simple tasks. Thus, point defects in solid state hosts are a very exciting platform, as they offer the possibility of light-matter interfaces that could marry the power of superconducting circuit computers with the distance allowed by photons. This would enable a variety of exciting quantum technologies, such as quantum cryptography, quantum-enhanced metrology, and modular quantum computing \cite{Monroe2014}.
 
 \section{\erbium in crystals as a technology for quantum networks }
+\label{sec:erbium-crystals-as}
 
 Single atoms and atom-like defects in crystals have successfully demonstrated a variety of quantum-network-related tasks. Examples include spin-photon entanglement in quantum dots \cite{Greve2012}, entanglement between trapped atoms and photons \cite{Blinov2004}, teleportation between remote trapped atom memories \cite{Nolleke2013}, and spin-photon entanglement using vacancy centers in diamonds \cite{Togan2010}. However, most existing systems use photons in the visible or near-infrared spectrum. For long-distance quantum communications over optical fibers, such photons would suffer crippling losses (on the order of several dB/km). One approach to countering these losses it to use a satellite uplink instead of optical fibers \cite{Yin2017}. However, for a majority of applications a satellite is impractical, and substantial fiber optic infrastructure already exists across the country. Single \erbium ions are thus a very promising qubit for quantum network applications, as they naturally have an optical transition at 1550 nm, the so-called ``telecom'' wavelength where losses in fibers drop to 0.2 dB/km.
 
@@ -171,6 +175,7 @@ Because the excited state lifetime of this system is so long, the natural linewi
 
 
 \section{Crystal fields}
+\label{sec:crystal-fields}
 
 The problem of modeling the effects of crystal fields on the spectra of ions is an old one, and tools exist for approaching it. First, we make use of the central field approximation, which roughly states that the repulsive potential an electron feels due to the other electrons is spherically symmetric. Thus the radial component of the wavefunctions decouples from the angular component, and focus can be turned to the angular component. The key idea underlying crystal field modelling is then decomposing the electric field of the crystal into a sum of spherical harmonics centered on the atom whose perturbations you are trying to measure. In other words, the crystal field hamiltonian is expressed as 
 \begin{equation}\label{eq:3}
@@ -254,8 +259,26 @@ The emission spectrum is different from the excitation spectrum, due primarily t
 
 This is why it can be advantageous to measure both at the same time. By measuring the emission spectrum for a range of different excitation wavelengths, a so-called ``2D spectrum'' can be obtained. Especially in situations where \erbium is sitting at multiple different sites in the crystal and thus multiple spectra are accessible, this additional dimension of resolution can be helpful in distinguishing the different spectra.
 
+Before measuring 2D spectra, an excitation scan is performed to identify the excitation wavelengths at which emission is visible. Then 2D scans are performed on the regions where features were visible. 
 
 \section{Peak finding and assignment}
+\label{sec:peak-find-assignm}
+
+The processing of 2D spectra consists of several steps. First, a moving window smoothing is performed on the two dimensions, one after another, iteratively. The number of iterations and the size of the windows are adjusted to reduce the number of non-physical local maxima in the data, but are kept as low as possible to avoid decreasing the resolution of the data. Typical values are two iterations with windows that are three bins wide.
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=0.47\textwidth]{PeakFinding}
+  \hfill
+  \includegraphics[width=0.47\textwidth]{LineSorting}
+  \caption{Left: a screenshot of peak sorting. Red dots are all potential peaks, green dots are the ones that have been manually selected as belonging to physical features. Right: a screenshot of grouping excitation lines into different sites. In the given figure, all lines belong to the same site.}
+  \label{fig:manual}
+\end{figure}
+
+Next, all the local maxima in the 2D spectrum are identified. The maxima are then sorted by hand, keeping only those which correspond to physical peaks. A screenshot of this process is provided in Figure \ref{fig:manual}. In the future, it would be preferable to do this filtration automatically, but it turns out to be a fairly difficult task to reject all the false peaks and accept all the real peaks, as the real peaks are often barely larger than the background noise.
+
+Once the real peaks are identified, they are sorted into different sites. This is also done manually, as depicted in Figure \ref{fig:manual}, by clicking on the vertical bins which contain peaks belonging to a given site to identify excitation lines. The emission lines are subsequently identified in the same way. From the emission and excitation lines, the energy level structure of the can be inferred.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -263,26 +286,191 @@ This is why it can be advantageous to measure both at the same time. By measurin
 \chapter{Characterization of new hosts}
 
 
-\subsection{MgO}
+\section{MgO}
 \label{sec:mgo}
 
-Roughly one to two pages for each material, including:
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=1]{JinD_spectrum_13K}
+  \caption{Excitation-emission spectrum of MgO at 13K.}
+  \label{fig:mgospectrum}
+\end{figure}
 
-\begin{itemize}
-\item 2D spectrum
+\textbf{Sample preparation}: Implanted with $10^{19}$ dose \notetoself{find out units on this}. Unannealed.
 
-\item Table of peak locations
+\textbf{Structure}: Magnesium oxide (MgO) is a cubic lattice consisting of O$^{2-}$ ions and Mg$^{2+}$ ions held together by ionic bonding. There are four types of sites with non-trivial symmetries: the two substitutional sites have cubic symmetry, as does the site in the center of the cube, and the midpoints of the ionic bonds have $C_{4}$ symmetry in one plane and $D_{1}$ symmetry along the axis normal to this plane. Because the crystal must remain net neutral, there might be some restructuring of the surrounding environment to compensate the introduction of the additional positive charge from the implanted \erbium ion. This may disturb the symmetries of the crystal.
 
-\item Table of proposed energy levels
+\textbf{Energy levels}: The spectrum for MgO is fairly complicated, with at least four clearly different sites contributing to the excitation-emission spectrum. The experimentally determined energy levels for each of these sites is listed in Table \ref{tab:mgolevels}. A few idiosyncracies are important to note for some of these sites. The $Z_{5}$ energy at Site 1 was never directly observed in the form of $Y_{1}Z_{5}$ emission like all the other $Z$ levels, and is hence listed in parenthesis. However, its location can be inferred from an emission line $Y_{3}Z_{5}$ which appears at higher temperatures. This peak can be seen emerging in Figure \ref{fig:mgosite1} and Figure \ref{fig:mgotemp}.
 
-\item Picture of crystal structure
+Another idiosyncracy is that Site 2 exhibits numerous side bands in both excitation and emission at low temperatures. These extra peaks can be seen both in Figure \ref{fig:mgosite2}, and a detail plot of some of them is given in Figure \ref{fig:site2sidebands}. The multiplicity of these peaks is too high for all of them to be associated with the same site. Thus, we conclude that they represent perturbations to the main Site 2, caused by small differences in the crystal structure some distance away from the \erbium ions. One possibility is that nearby Mg$^{2+}$ ions have been removed to compensate for the additional charge introduced by the \erbium ions, and that the different levels are due to different locations of these Mg-vacancies in the crystal.
 
-\item Crystal field parameters (if applicable - probably only MgO)
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.48\textwidth]{Site2Multiplicity}
+  \caption{Detail plot of Site 2 side bands in the MgO excitation-emission spectrum at 13K.}
+  \label{fig:site2sidebands}
+\end{wrapfigure}
 
-\item Any additional commentary (unusual lineshapes, etc.)
+A third idiosyncracy has to do with the brightest peak in the entire spectrum, which belongs to Site 3, and falls at 6540 \wn in excitation. This peak is bimodal, as shown in Figure \notetoself{make this figure}. There are two explanations for this distribution. Either these two peaks correspond to different levels in the same site, or they correspond to the same level at two sites which are very similar but slightly different. 
 
-\item Discussion of potential usefulness for single photon applications 
-\end{itemize}
+Our energy level assignments are supported by the plots in Figure \ref{fig:mgotemp}. These figures show the emission spectra when exciting the $Z_{1}Y_{1}$ transition of the different sites, normalized so that emission at $Y_{1}Z_{1}$ is equal to 1. The other features identified as emission from $Y_{1}$ remain the same height relative to $Y_{1}Z_{1}$. The features identified as emission from higher $Y$ levels, on the other hand, get brighter as the temperature increases, demonstrating that their thermal occupation has increased. An important assumption in this situation is that emission is slow enough that the excited state electrons thermalize full before decaying. This assumption is supported by the fact that the relative heights of the peaks in the emission spectrum are independent of the excitation transition at which they are observed.
+
+\textbf{Crystal field modelling}: Unimplanted MgO has a cubic crystal structure. In an environment with cubic symmetry, there are only two free crystal field parameters, and thus the task of fitting an experimentally determined spectrum to theory is feasible (see Section \ref{sec:crystal-fields}). Interestingly, however, neither Site 1, Site 2, or Site 4 have energy levels consistent with a cubic crystal environment. From this, we conclude that charge compensation when \erbium replaces Mg$^{2+}$ necessitates changes to the crystal structure surrounding the \erbium which break the cubic symmetry of the environment. A likely candidate is the removal of nearby Mg$^{2+}$ ions, which can occur in line with the \erbium ion two sites away, or diagonally from the \erbium ion, or possibly farther away.
+
+\begin{wraptable}{r}{0.5\textwidth}
+  \centering
+  \begin{tabular}{| c | c | c |}
+    \hline
+    $B_{4}$ & $B_{6}$ & SSE (cm$^{-2}$) \\
+    \hline
+    $-1.67\times 10^{-4}$ & $4.87\times 10^{-5}$ & $8.1\times 10^{-2}$ \\
+    $1.51\times 10^{-2}$ & $-1.58\times 10^{-6}$ & $7.8\times 10^{-2}$\\
+    \hline
+  \end{tabular}
+  \caption{Cubic crystal field parameters that reproduce the spectrum of Site 3 to within the resolution of the experiment.}
+  \label{tab:crystalfieldparams}
+\end{wraptable}
+
+The spectrum of Site 3, on the other hand, can be reproduced by a cubic crystal field model. Table \ref{tab:crystalfieldparams} shows the two sets of crystal field parameters which give accurate\footnote{Where accurate is defined to mean that the sum of squared errors of the energy levels is within the tolerances of the spectrometer resolution, roughly 1 \wn.} reproductions of the energy levels observed in Site 3. The fitting of these parameters must be taken with a grain of salt; since Site 3 only has two nontrivial energy levels,\footnote{$Z_{2}$ and $Z_{3}$ are not different enough to count separately for our purposes.} it is not surprising that it was possible to fit two parameters effectively; the problem is not overdetermined. Further investigation is warranted. For example, given a set of crystal field parameters, it is possible to calculate the matrix element between the different states, and thus the theoretical brightness of each transition. If the theoretical transition strengths match the observed transition strengths, it would be stronger evidence for the accuracy of one of these sets of parameters.
+
+
+
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    MgO & \multicolumn{2}{c|}{Site 1}& \multicolumn{2}{c|}{Site 2} \\
+    \hline
+    $n$ & $Z_{n}$ & $Y_{n}$ ($+6499$ \wn) & $Z_{n}$ & $Y_{n}$ ($+6510$ \wn) \\
+    \hline 
+    1 & 0.0 & 0.0 & 0.0 & 0.0 \\
+    2 & 26.7 & 7.8 & 41.2 & 29.1 \\
+    3 & 95.3 & 34.9 & 83.8 & 58.3 \\
+    4 & 128.6 & 71.7 & 156.4 & 117.2 \\
+    5 & (195.2) & 131.3 & 187.2 & * \\
+    6-8 & * & * & * & * \\
+    \hline \hline
+    MgO & \multicolumn{2}{c|}{Site 3}& \multicolumn{2}{c|}{Site 4} \\
+    \hline
+    $n$ & $Z_{n}$ & $Y_{n}$ ($+6492$ \wn) & $Z_{n}$ & $Y_{n}$ ($+6557$ \wn)\\
+    \hline 
+    1 & 0.0 & 0.0 & 0.0 & 0.0  \\
+    2 & * & 48.1 & 82.8 & 42.0 \\
+    3 & * & (48.4) & 168.6 & *  \\
+    4 & * & (98.6) & * & * \\
+    5-8 & * & * & * & * \\
+    \hline
+  \end{tabular}
+  \caption{Experimentally determined energy levels of MgO for all visible sites. Transitions not observed are marked with an asterisk. The level $Z_{5}$ in Site 1 is not directly observed, and thus marked with parentheses. $Z_{2}$ and $Z_{3}$ for Site 3 may or not correspond to distinct levels, which would affect the numbering of $Z_{4}$; hence $Z_{3}$ and $Z_{4}$ are marked with parentheses.}
+  \label{tab:mgolevels}
+\end{table}
+
+
+
+\textbf{Linewidths and shapes}: None of the MgO peaks demonstrate excitation-emission correlation like MoO$_{3}$.
+
+\textbf{Potential for single-ion applications}: 
+
+
+
+
+% Table with 5 entries
+% \begin{tabular}{| c | c | c | c | c | c | c |}
+%     \hline
+%     MgO & \multicolumn{2}{c|}{Site 1}& \multicolumn{2}{c|}{Site 2} & \multicolumn{2}{c|}{Site 3}\\
+%     \hline
+%     $n$ & $Z_{n}$ & $Y_{n}$ ($+6499$ \wn) & $Z_{n}$ & $Y_{n}$ ($+6510$ \wn) & $Z_{n}$ & $Y_{n}$ ($+6492$ \wn) \\
+%     \hline 
+%     1 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+%     2 & 26.7 & 7.8 & 41.2 & 29.1 & * & 48.1  \\
+%     3 & 95.3 & 34.9 & 83.8 & 58.3 & * & (48.4)\\
+%     4 & 128.6 & 71.7 & 156.4 & 117.2 & * & (98.6)\\
+%     5 & (195.2) & 131.3 & 187.2 & * & * & *\\
+%     6-8 & * & * & * & * & * & * \\
+%     \hline \hline
+%     MgO & \multicolumn{2}{c|}{Site 4}& \multicolumn{2}{c|}{Site 5} & \multicolumn{2}{c|}{} \\
+%     \hline
+%     $n$ & $Z_{n}$ & $Y_{n}$ ($+6492$ \wn) & $Z_{n}$ & $Y_{n}$ ($+6557$ \wn) & \multicolumn{2}{c|}{} \\
+%     \hline 
+%     1 & 0.0 & 0.0 & 0.0 & 0.0 & \multicolumn{2}{c|}{}  \\
+%     2 & 82.8 & 42.0 & 82.8 & 42.0 & \multicolumn{2}{c|}{} \\
+%     3 & 168.6 & * & 168.6 & * & \multicolumn{2}{c|}{}  \\
+%     4-8 & * & * & \multicolumn{2}{c|}{} \\
+%     \hline
+%   \end{tabular}
+
+\newpage
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site1_32K}\\
+  \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site1_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively.}
+  \label{fig:mgosite1}
+\end{figure}
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site2_32K}\\
+  \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site2_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively.}
+  \label{fig:mgosite2}
+\end{figure}
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site3_32K}\\
+  \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site3_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. Emission lines for which no level assignment can be determined are plotted in yellow.}
+  \label{fig:mgosite3}
+\end{figure}
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site4_32K}\\
+  \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site4_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure.}
+  \label{fig:mgosite4}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=0.75]{JinD_site1_temp}
+  \includegraphics[scale=0.75]{JinD_site2_temp}
+  \includegraphics[scale=0.75]{JinD_site3_temp}
+  \includegraphics[scale=0.75]{JinD_site4_temp}
+  \caption{Temperature dependence of emission spectrum in MgO, excited at $Z_{1}Y_{1}$, for Sites 1, 2, 3, and 4, from top to bottom. Each peak is labeled with its corresponding emission transition.}
+  \label{fig:mgotemp}
+\end{figure}
+
+
+
+% \newpage
+
+% Roughly one to two pages for each material, including:
+
+% \begin{itemize}
+% \item 2D spectrum
+
+% \item Table of proposed energy levels
+
+% \item Picture of crystal structure
+
+% \item Crystal field parameters (if applicable - probably only MgO)
+
+% \item Any additional commentary (unusual lineshapes, etc.)
+
+% \item Discussion of potential usefulness for single photon applications 
+% \end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
