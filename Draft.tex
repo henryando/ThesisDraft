@@ -51,6 +51,9 @@
 \newcommand{\YSO}[1][ ]{Y$_{2}$SiO$_{5}$#1}
 \newcommand{\ErYSO}[1][ ]{Er$^{3+}$:Y$_{2}$SiO$_{5}$#1}
 \newcommand{\TiO}[1][ ]{TiO$_{2}$#1}
+\newcommand{\MgO}[1][ ]{MgO#1}
+\newcommand{\MgO2}[1][ ]{MgO$^{2+}$#1}
+\newcommand{\O2}[1][ ]{O$^{2-}$#1}
 \newcommand{\supercite}[1]{$^{\text{\cite{#1}}}$}
 \graphicspath{{Figures/}}
 \newcommand{\notetoself}[1]{\textcolor{red}{#1}}
@@ -217,12 +220,17 @@ where $O_{4}^{0}$, $O_{4}^{4}$, $O_{6}^{0}$ and $O_{6}^{4}$ are $2J+1$ dimension
 \subsection{Ion implantation}
 \label{sec:ion-implantation}
 
+There are many ways to dope ions into crystals. Previous work made use of so-called ``bulk-doping,'' a process where the crystal (in this case, \YSO[]) is grown with small amounts of \erbium in it. Unfortunately, for chemical reasons the minimum concentration of \erbium possible with bulk doping is still higher than is desirable for single-ion applications. Ion implantation is a method for doping in arbitrarily low quantities of an ion. Sing ions of the desired are separated into gas. These floating single ions are then accelerated into the target crystal with a powerful electric field. The number of ions that end up in the crystal can be measured via the current between the crystal and the ion source. 
+
 \subsection{Annealing}
 \label{sec:annealing}
 
+Annealing is a process where crystals are heated to a temperature high enough that their structure can shift slightly, and then gradually cooled back down to room temperature. Annealing can be helpful in repairing structural damage like the damage done by ion implantation. In \cite{Phenicie2019}, the authors showed that annealing increased the implantation yield and reduced optical linewidths in \erbium implanted in \TiO[.] For all tested samples, annealing is a possible next step (provided the crystal can withstand it). If \erbium is visible, annealing might reduce linewidths, and if \erbium is not visible, annealing might increase the yield so that it is visible. 
 
 \subsection{Polishing and photonic crystals}
 \label{sec:polishing}
+
+For our applications, it is important that the crystal hosts can be polished, as the photonic crystal cavities we use are attached to the top of the crystal purely through van der Waals forces. This method only works if the surface is sufficiently smooth. 
 
 \section{Photoluminescence excitation spectroscopy}
 \label{sec:phot-excit-spectr}
@@ -277,7 +285,7 @@ The processing of 2D spectra consists of several steps. First, a moving window s
 
 Next, all the local maxima in the 2D spectrum are identified. The maxima are then sorted by hand, keeping only those which correspond to physical peaks. A screenshot of this process is provided in Figure \ref{fig:manual}. In the future, it would be preferable to do this filtration automatically, but it turns out to be a fairly difficult task to reject all the false peaks and accept all the real peaks, as the real peaks are often barely larger than the background noise.
 
-Once the real peaks are identified, they are sorted into different sites. This is also done manually, as depicted in Figure \ref{fig:manual}, by clicking on the vertical bins which contain peaks belonging to a given site to identify excitation lines. The emission lines are subsequently identified in the same way. From the emission and excitation lines, the energy level structure of the can be inferred.
+Once the real peaks are identified, they are sorted into different sites. This is also done manually, as depicted in Figure \ref{fig:manual}, by clicking on the vertical bins which contain peaks belonging to a given site to identify excitation lines. The emission lines are subsequently identified in the same way. From the emission and excitation lines, the energy level structures of the ground and excited states can be inferred.
 
 
 
@@ -440,84 +448,64 @@ where $D$ is the Heaviside step function, $N$ is a normalization prefactor, $b$ 
 Figure \ref{fig:site3peaks} shows that the agreement between this fitted model and the data is very good. We thus conclude that this feature corresponds to two different features with opposite sign second-order Stark shifts. Whether these features belong to the same site or two different sites is unclear, but the former seems more likely than the latter due to their incredibly close spacing. The same question applies to the bimodal $Z_{1}Y_{1}$ feature at Site 3. For the purposes of simplicity, the $Z_{1}Y_{1}$ features has been treated as a single line throughout this analysis. However, due to their significant separation ($\sim 0.1$ \wn), the $Z_{1}Y_{2}$ features have been treated as two separate features, referred to as $Z_{1}Y_{2}$ and $Z_{1}Y_{3}$ throughout. To emphasize the uncertainty of this choice, the energy levels reported in Table \ref{tab:mgolevels} are marked with parentheses to indicate that the numbering is uncertain.
 
 \subsection{Potential for single-ion applications}
-The observation of \erbium ions implanted in MgO is very exciting, because MgO has several desirable qualities as a potential host crystal. Magnesium and Oxygen both have stable isotopes with nuclear spin 0, so MgO can be made free of the nuclear spin problem that reduced coherence times in YSO. \erbium in MgO might therefore have substantially longer coherence times.
+The observation of \erbium ions implanted in MgO is very exciting, because MgO has several desirable qualities as a potential host crystal. Magnesium and oxygen both have stable isotopes with nuclear spin 0, so MgO can be made free of the nuclear spin problem that reduced coherence times in YSO. \erbium in MgO might therefore have substantially longer coherence times.
 
-Another quality of MgO that made it an exciting candidate host was its high level of symmetry. A highly symmetric crystal will typically reduce the static electric dipole moment of an implanted ion, and thus its susceptibility to inhomogeneous broadening via the first-order Stark effect. Our results do indeed show very narrow inhomogeneous linewidths for several of the sites, especially Site 2, where the smallest observed linewidth was around $2$ GHz and appeared to be naturally broadened. Interestingly, the only site that was inhomogeneously broadened at 13K was Site 3, the site which we showed to have no first-order Stark shift. It is surprising that the second order Stark effect at Site 3 is more substantial than the first order Stark effect at the other sites. It is not surprising, however, that Site 3 is both the only site which fit a cubic field model and the only site where the second order Stark effect was clearly visible. A cubic crystal environment would forbid a static electric dipole moment, and thus any first order Stark shift. Our results from crystal field modelling and from the analysis of lineshapes reinforce each other in this regard.
+Another quality of MgO that made it an exciting candidate host was its high level of symmetry. A highly symmetric crystal will typically reduce the static electric dipole moment of an implanted ion, and thus its susceptibility to inhomogeneous broadening via the first-order Stark effect. Our results do indeed show very narrow inhomogeneous linewidths for several of the sites, especially Site 2, where the smallest observed linewidth was around $2$ GHz and appeared to be naturally broadened, indicating that the inhomogeneous linewidth is even lower. Interestingly, the only site that was inhomogeneously broadened at 13K was Site 3, the site which we showed to have no first-order Stark shift. It is surprising that the second order Stark effect at Site 3 is more substantial than the first order Stark effect at the other sites. It is not surprising, however, that Site 3 is both the only site which fit a cubic field model and the only site where the second order Stark effect was clearly visible. A cubic crystal environment would forbid a static electric dipole moment, and thus any first order Stark shift. Our results from crystal field modelling and from the analysis of lineshapes reinforce each other in this regard.
 
-MgO is therefore a very exciting potential host crystal. It has no nuclear spins, and very narrow inhomogeneous linewidths. It remains to be seen whether photonic crystal cavities with high quality factors can be attached to MgO. This is the next great hurdle. 
+MgO is therefore a very exciting potential host crystal. It has no nuclear spins, and very narrow inhomogeneous linewidths. It remains to be seen whether photonic crystal cavities with high quality factors can be attached to MgO. This is the next great hurdle. Further spectroscopic study is also warranted. For example, nearly all optical linewidths we observed were homogeneously broadened. Probing lower temperatures would lower the natural linewidths and enable us to measure the inhomogeneous linewidths for Sites 1, 2, and 4. Unfortunately this was not possible previously due to a leak in the cryostat which prevented us from cooling the sample below 13 K.
 
 
 \newpage
 
-\begin{figure}[b]
-  \centering
-  \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
-  \includegraphics[scale=0.97]{JinD_site1_32K}\\
-  \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
-  \includegraphics[scale=0.97]{JinD_site1_106K}
-  \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
-  \label{fig:mgosite1}
-\end{figure}
+% \begin{figure}[b]
+%   \centering
+%   \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site1_32K}\\
+%   \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site1_106K}
+%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+%   \label{fig:mgosite1}
+% \end{figure}
 
-\begin{figure}[b]
-  \centering
-  \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
-  \includegraphics[scale=0.97]{JinD_site2_32K}\\
-  \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
-  \includegraphics[scale=0.97]{JinD_site2_106K}
-  \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
-  \label{fig:mgosite2}
-\end{figure}
+% \begin{figure}[b]
+%   \centering
+%   \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site2_32K}\\
+%   \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site2_106K}
+%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+%   \label{fig:mgosite2}
+% \end{figure}
 
-\begin{figure}[b]
-  \centering
-  \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
-  \includegraphics[scale=0.97]{JinD_site3_32K}\\
-  \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
-  \includegraphics[scale=0.97]{JinD_site3_106K}
-  \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures. Emission lines for which no level assignment can be determined are plotted in yellow.}
-  \label{fig:mgosite3}
-\end{figure}
+% \begin{figure}[b]
+%   \centering
+%   \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site3_32K}\\
+%   \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site3_106K}
+%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures. Emission lines for which no level assignment can be determined are plotted in yellow.}
+%   \label{fig:mgosite3}
+% \end{figure}
 
-\begin{figure}[b]
-  \centering
-  \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
-  \includegraphics[scale=0.97]{JinD_site4_32K}\\
-  \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
-  \includegraphics[scale=0.97]{JinD_site4_106K}
-  \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
-  \label{fig:mgosite4}
-\end{figure}
+% \begin{figure}[b]
+%   \centering
+%   \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site4_32K}\\
+%   \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
+%   \includegraphics[scale=0.97]{JinD_site4_106K}
+%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+%   \label{fig:mgosite4}
+% \end{figure}
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[scale=0.75]{JinD_site1_temp}
-  \includegraphics[scale=0.75]{JinD_site2_temp}
-  \includegraphics[scale=0.75]{JinD_site3_temp}
-  \includegraphics[scale=0.75]{JinD_site4_temp}
-  \caption{Temperature dependence of emission spectrum in MgO, excited at $Z_{1}Y_{1}$, for Sites 1, 2, 3, and 4, from top to bottom. Each peak is labeled with its corresponding emission transition.}
-  \label{fig:mgotemp}
-\end{figure}
-
-
-
-% \newpage
-
-% Roughly one to two pages for each material, including:
-
-% \begin{itemize}
-% \item 2D spectrum
-
-% \item Table of proposed energy levels
-
-% \item Picture of crystal structure
-
-% \item Crystal field parameters (if applicable - probably only MgO)
-
-% \item Any additional commentary (unusual lineshapes, etc.)
-
-% \item Discussion of potential usefulness for single photon applications 
-% \end{itemize}
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[scale=0.75]{JinD_site1_temp}
+%   \includegraphics[scale=0.75]{JinD_site2_temp}
+%   \includegraphics[scale=0.75]{JinD_site3_temp}
+%   \includegraphics[scale=0.75]{JinD_site4_temp}
+%   \caption{Temperature dependence of emission spectrum in MgO, excited at $Z_{1}Y_{1}$, for Sites 1, 2, 3, and 4, from top to bottom. Each peak is labeled with its corresponding emission transition.}
+%   \label{fig:mgotemp}
+% \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -525,6 +513,15 @@ MgO is therefore a very exciting potential host crystal. It has no nuclear spins
 \chapter{Design of a low-cost, high-resolution Fourier transform spectrometer}
 
 \section{Motivation}
+
+The array-detector-based emission spectrometer greatly sped up the acquisition of excitation-emission spectra. However, it has two primary limitations which impose constraints on our measurements. One is the resolution. The detector has \notetoself{1024} bins, which sets the resolution on a 100 nm wide scan to only 0.1 nm, which is often not enough for our purposes. Furthermore, increasing the resolution by decreasing the width of the slit attenuates the signal, further lowering the signal to noise ratio.
+
+The other limitation is the signal to noise ratio itself, which is not high enough for us to see all the peaks we might be able to see with a less noisy detection scheme. For the array detector, there are three main sources of noise. One is the readout noise of the detectors, which contributes roughly 700 counts per bin per readout operation and thus a constant noise level of roughly 25 counts per bin per readout. Another is leakage, both from the room and from the excitation light, which cannot be completely filtered out of the detector. And the third is dark counts in the detector, which correspond to the black box thermal photons inside the detector. Because of the readout noise, you can improve your measurement somewhat by acquiring data for a longer time; however, due to the dark counts and bleedthrough which occur at a constant rate in time, the signal to noise ratio eventually begins to plateau and your measurement stops improving substantially with longer acquisition times. Furthermore, the bins fill up after roughly 7000 counts, putting a further limit on the maximum acquisition time per readout.
+
+The signal to noise ratio on the low-noise photodiode used for PLE is better than the signal to noise ratio on the array detector for the purposes of detecting the smallest signals possible. In part this is because a single detector simply introduces less noise than 1024 detectors. This has inspired the idea of using 
+
+
+
 
 \begin{itemize}
 \item What limits our ability to measure smaller signals with the commercial spectrometer? Why do we think Fourier transform spectroscopy could improve our ability to detect smaller signals?
