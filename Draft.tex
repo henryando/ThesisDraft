@@ -151,9 +151,9 @@ This transition, however, is very slow, with a natural linewidth on the order of
 
 Previous work by the Thompson lab has shown that by stamping silicon nanophotonic cavities on top of crystals doped with \erbium ions, the emission rate can be enhanced by 600 times via the Purcell effect \cite{Dibos2017}. Figure \ref{fig:cavity} shows a graphic of this scheme. This approach is very promising - however, the crystal substrate could be improved in numerous ways. For one thing, this work used \YSO[], a crystal with relatively strong nuclear spins. These nuclear spins substantially limit the coherence times of the \erbium spin qubits embedded in the crystal. Another other issue is that the density of \erbium ions is high enough in the bulk-doped \YSO that tens to hundreds of ions couple to the cavity, preventing simple frequency-based resolution of the different ions each cavity couples to, and reducing coherence times further due to electric dipole interactions between nearby \erbium ions. Finally, a different crystal field configuration could potentially increase the emission rate further, by increasing the matrix element between the ground and excited state wavefunctions.\footnote{The \erbium telecom transition is electric dipole forbidden. Small perturbations to the electronic wavefunctions can thus make substantial relative differences to the matrix element between the ground and excited states. The spectroscopic properties of \erbium are discussed in more detail in Section \ref{sec:spectr-prop-erbi}.}
 
-Unfortunately, using bulk doping methods it is impossible to grow crystals with lower concentrations of \erbium than in this previous work \cite{Dibos2017}. The Thompson lab has thus turned to ion implantation to achieve lower doses of \erbium in new potential crystal hosts.\footnote{Ion implantation is a process by which ions are accelerated into the surface of a crystal, and become lodged in the structure of the crystal. More information on this process is given in Section } Last fall, it was shown that \erbium could be successfully implanted in \TiO[], a crystal with low nuclear spins, with narrow optical linewidths \cite{Phenicie2019}. \notetoself{Given that \TiO worked, why continue searching? Not super clear on this myself. Does it have to do with attaching photonic crystals?}
+Unfortunately, using bulk doping methods it is impossible to grow crystals with lower concentrations of \erbium than in this previous work \cite{Dibos2017}. The Thompson lab has thus turned to ion implantation to achieve lower doses of \erbium in new potential crystal hosts.\footnote{Ion implantation is a process by which ions are accelerated into the surface of a crystal, and become lodged in the structure of the crystal. More information on this process is given in Section } Last fall, it was shown that \erbium could be successfully implanted in \TiO[]. The implanted \erbium had narrow optical linewidths, and \TiO has no nuclear spins, so this was an exciting result \cite{Phenicie2019}. However, the quality factor of photonic crystals on \TiO could never be made high enough, likely due to the poor telecom transparency of \TiO[].
 
-In the interests of discovering potentially more optimal host crystals, a large batch of crystals was implanted with \erbium ions. For all these implanted crystals, it was necessary to determine experimentally whether \erbium was visible in the crystal, and if so, to determine its spectral properties to begin understanding how \erbium ions in this crystal would perform as single photon emitters. Where are the emission and excitation lines? How bright and broad are they? What can we learn about how the \erbium ions are sitting in the crystal lattice? These are the questions that motivate this work.
+In the interests of discovering better potential host crystals, a large batch of crystals was implanted with \erbium ions. For all these implanted crystals, it was necessary to determine experimentally whether \erbium was visible in the crystal, and if so, to determine its spectral properties to begin understanding how \erbium ions in this crystal would perform for single ion applications. Where are the emission and excitation lines? How bright and broad are they? What can we learn about how the \erbium ions are sitting in the crystal lattice? These are the questions that motivate this work. Before laying out our methods and results, we first provide some theoretical background about \erbium and crystals.
 
 \section{Spectroscopic Properties of \erbium in Solid State Hosts}
 \label{sec:spectr-prop-erbi}
@@ -203,7 +203,7 @@ In general, the number of crystal field parameters is infinite. However, various
 \begin{equation}\label{eq:7}
   H = B_{4}(O_{4}^{0}+ 5\cdot O_{4}^{4}) + B_{6}(O_{6}^{0}-21\cdot O_{6}^{4}),
 \end{equation}
-where $O_{4}^{0}$, $O_{4}^{4}$, $O_{6}^{0}$ and $O_{6}^{4}$ are $2J+1$ dimensional constant matrices (for their exact form see \cite{Lea1962}). The upshot of this for our purposes is that the crystal field environment that \erbium ions experience in MgO, a crystal with cubic symmetry, could potentially be determined precisely. In Section \ref{sec:mgo} we take up this task.
+where $O_{4}^{0}$, $O_{4}^{4}$, $O_{6}^{0}$ and $O_{6}^{4}$ are $2J+1$ dimensional constant matrices (for their exact form see \cite{Lea1962}). The upshot of this for our purposes is that the crystal field environment that \erbium ions experience in cubic crystals can potentially be determined exactly, enabling a complete description of the eigenstates of the \erbium optical electron. % In Section \ref{sec:mgo} we use this model to study \erbium in MgO, a crystal with cubic symmetry.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -296,13 +296,17 @@ Once the real peaks are identified, they are sorted into different sites. This i
   \label{fig:mgospectrum}
 \end{figure}
 
-\textbf{Sample preparation}: Implanted with $10^{19}$ dose \notetoself{find out units on this}. Unannealed.
+\subsection{Sample preparation}
+Implanted with $10^{19}$ dose \notetoself{find out units on this}. Unannealed.
 
-\textbf{Structure}: Magnesium oxide (MgO) is a cubic lattice consisting of O$^{2-}$ ions and Mg$^{2+}$ ions held together by ionic bonding. There are four types of sites with non-trivial symmetries: the two substitutional sites have cubic symmetry, as does the site in the center of the cube, and the midpoints of the ionic bonds have $C_{4}$ symmetry in one plane and $D_{1}$ symmetry along the axis normal to this plane. Because the crystal must remain net neutral, there might be some restructuring of the surrounding environment to compensate the introduction of the additional positive charge from the implanted \erbium ion. This may disturb the symmetries of the crystal.
+\subsection{Structure}
+Magnesium oxide (MgO) is a cubic lattice consisting of O$^{2-}$ ions and Mg$^{2+}$ ions held together by ionic bonding. There are three sites with cubic symmetry: the two substitutional sites have cubic symmetry, as does the interstitial site in the center of the cube. Because the crystal must remain net neutral, there might be some restructuring of the surrounding environment to compensate the introduction of the additional positive charge from the implanted \erbium ion. This may disturb the symmetries of the crystal.
 
-\textbf{Energy levels}: The spectrum for MgO is fairly complicated, with at least four clearly different sites contributing to the excitation-emission spectrum. The experimentally determined energy levels for each of these sites is listed in Table \ref{tab:mgolevels}. A few idiosyncracies are important to note for some of these sites. The $Z_{5}$ energy at Site 1 was never directly observed in the form of $Y_{1}Z_{5}$ emission like all the other $Z$ levels, and is hence listed in parenthesis. However, its location can be inferred from an emission line $Y_{3}Z_{5}$ which appears at higher temperatures. This peak can be seen emerging in Figure \ref{fig:mgosite1} and Figure \ref{fig:mgotemp}.
+\newpage 
+\subsection{Energy levels}
+The spectrum for MgO is fairly complicated, with at least four clearly different sites contributing to the excitation-emission spectrum. The experimentally determined energy levels for each of these sites is listed in Table \ref{tab:mgolevels}, and plotted over the spectra in Figures \ref{fig:mgosite1}, \ref{fig:mgosite2}, \ref{fig:mgosite3}, and \ref{fig:mgosite4}. These figures show excitation and emission from new $Z$ and $Y$ levels beginning to appear at higher temperatures.
 
-Another idiosyncracy is that Site 2 exhibits numerous side bands in both excitation and emission at low temperatures. These extra peaks can be seen in Figure \ref{fig:mgosite2}, and a detail plot of some of them is given in Figure \ref{fig:site2sidebands}. The multiplicity of these peaks is too high for all of them to be associated with the same site. Thus, we conclude that they represent perturbations to the main Site 2, caused by small differences in the crystal structure some distance away from the \erbium ions. One possibility is that nearby Mg$^{2+}$ ions have been removed to compensate for the additional charge introduced by the \erbium ions, and that the different levels are due to different locations of these nearby Mg-vacancies in the crystal.
+Our energy level assignments are also supported by the temperature-dependent data in Figure \ref{fig:mgotemp}. These figures show the emission spectra when exciting the $Z_{1}Y_{1}$ transition of the different sites, normalized so that emission at $Y_{1}Z_{1}$ is equal to 1. The other features identified as emission from $Y_{1}$ remain the same height relative to $Y_{1}Z_{1}$. The features identified as emission from higher $Y$ levels, on the other hand, get brighter as the temperature increases, demonstrating that their thermal occupation has increased. An important assumption in this situation is that emission is slow enough that the excited state electrons thermalize fully before decaying. This assumption is supported by the fact that the relative heights of the peaks in the emission spectrum are independent of the excitation transition at which they are observed.
 
 \begin{wrapfigure}{r}{0.5\textwidth}
   \centering
@@ -311,29 +315,7 @@ Another idiosyncracy is that Site 2 exhibits numerous side bands in both excitat
   \label{fig:site2sidebands}
 \end{wrapfigure}
 
-A third idiosyncracy has to do with the brightest peak in the entire spectrum, which belongs to Site 3, and falls at 6540 \wn in excitation. This peak is bimodal, as shown in Figure \notetoself{make this figure}. There are two explanations for this distribution. Either these two peaks correspond to different levels in the same site, or they correspond to the same level at two sites which are very similar but slightly different. 
-
-Our energy level assignments are supported by the plots in Figure \ref{fig:mgotemp}. These figures show the emission spectra when exciting the $Z_{1}Y_{1}$ transition of the different sites, normalized so that emission at $Y_{1}Z_{1}$ is equal to 1. The other features identified as emission from $Y_{1}$ remain the same height relative to $Y_{1}Z_{1}$. The features identified as emission from higher $Y$ levels, on the other hand, get brighter as the temperature increases, demonstrating that their thermal occupation has increased. An important assumption in this situation is that emission is slow enough that the excited state electrons thermalize fully before decaying. This assumption is supported by the fact that the relative heights of the peaks in the emission spectrum are independent of the excitation transition at which they are observed.
-
-\textbf{Crystal field modelling}: Unimplanted MgO has a cubic crystal structure. In an environment with cubic symmetry, there are only two free crystal field parameters, and thus the task of fitting an experimentally determined spectrum to theory is feasible (see Section \ref{sec:crystal-fields}). Interestingly, however, neither Site 1, Site 2, or Site 4 have energy levels consistent with a cubic crystal environment. From this, we conclude that charge compensation when \erbium replaces Mg$^{2+}$ necessitates changes to the crystal structure surrounding the \erbium which break the cubic symmetry of the environment. A likely candidate is the removal of nearby Mg$^{2+}$ ions, which can occur in line with the \erbium ion two sites away, or diagonally from the \erbium ion, or possibly farther away.
-
-\begin{wraptable}{r}{0.5\textwidth}
-  \centering
-  \begin{tabular}{| c | c | c |}
-    \hline
-    $B_{4}$ & $B_{6}$ & SSE (cm$^{-2}$) \\
-    \hline
-    $-1.67\times 10^{-4}$ & $4.87\times 10^{-5}$ & $8.1\times 10^{-2}$ \\
-    $1.51\times 10^{-2}$ & $-1.58\times 10^{-6}$ & $7.8\times 10^{-2}$\\
-    \hline
-  \end{tabular}
-  \caption{Cubic crystal field parameters that reproduce the spectrum of Site 3 to within the resolution of the experiment.}
-  \label{tab:crystalfieldparams}
-\end{wraptable}
-
-The spectrum of Site 3, on the other hand, can be reproduced by a cubic crystal field model. Table \ref{tab:crystalfieldparams} shows the two sets of crystal field parameters which give accurate\footnote{Where accurate is defined to mean that the sum of squared errors of the energy levels is within the tolerances of the spectrometer resolution, roughly 1 \wn.} reproductions of the energy levels observed in Site 3. The fitting of these parameters must be taken with a grain of salt; since Site 3 only has two nontrivial energy levels,\footnote{$Z_{2}$ and $Z_{3}$ are not different enough to count separately for our purposes.} it is not surprising that it was possible to fit two parameters effectively; the problem is not overdetermined. Further investigation is warranted. For example, given a set of crystal field parameters, it is possible to calculate the matrix element between the different states, and thus the theoretical brightness of each transition. If the theoretical transition strengths match the observed transition strengths, it would be stronger evidence for the accuracy of one of these sets of parameters.
-
-Another route to inferring the remaining ground states of Site 3 is through the remaining visible emission lines in Figure \ref{fig:mgosite3}. As the temperature dependent data in Figure \ref{fig:mgotemp} show, these lower energy lines do not correspond to emission from $Y_{1}$, as they get relatively brighter with increasing temperature. By quantitatively studying the temperature dependence of their increasing brightness, we could deduce the $Y$ level from which they originate. From there, some of the remaining $Z$ levels could be calculated.
+A few idiosyncracies are important to note for some of these sites. The $Z_{5}$ energy at Site 1 was never directly observed in the form of $Y_{1}Z_{5}$ emission like all the other $Z$ levels, and is hence listed in parenthesis. However, its location can be inferred from an emission line $Y_{3}Z_{5}$ which appears at higher temperatures. This peak can be seen emerging in Figure \ref{fig:mgosite1} and Figure \ref{fig:mgotemp}.
 
 \begin{table}[t]
   \centering
@@ -355,17 +337,45 @@ Another route to inferring the remaining ground states of Site 3 is through the 
     $n$ & $Z_{n}$ & $Y_{n}$ ($+6492$ \wn) & $Z_{n}$ & $Y_{n}$ ($+6557$ \wn)\\
     \hline 
     1 & 0.0 & 0.0 & 0.0 & 0.0  \\
-    2 & * & 48.1 & 82.8 & 42.0 \\
+    2 & * & (48.1) & 82.8 & 42.0 \\
     3 & * & (48.4) & 168.6 & *  \\
     4 & * & (98.6) & * & * \\
     5-8 & * & * & * & * \\
     \hline
   \end{tabular}
-  \caption{Experimentally determined energy levels of MgO for all visible sites. Transitions not observed are marked with an asterisk. The level $Z_{5}$ in Site 1 is not directly observed, and thus marked with parentheses. $Z_{2}$ and $Z_{3}$ for Site 3 may or not correspond to distinct levels, which would affect the numbering of $Z_{4}$; hence $Z_{3}$ and $Z_{4}$ are marked with parentheses.}
+  \caption{Experimentally determined energy levels of MgO for all visible sites. Transitions not observed are marked with an asterisk. The level $Z_{5}$ in Site 1 is not directly observed, and thus marked with parentheses. The numbering of the $Z$ levels for Site 3 is somewhat uncertain (see the discussion in Section \ref{sec:linewidths-shapes}).}
   \label{tab:mgolevels}
 \end{table}
 
-\textbf{Linewidths and shapes}: PLE scans of MgO were taken at 13, 32, 60, and 106K. Taking the level assignments discussed above, the excitation peaks corresponding to excitation from $Z_{1}$ to $Y_{n}$ for all visible $Y_{n}$ were located for all four sites. For each of these peaks, two profiles were fitted, a Gaussian profile and a Lorentzian profile. When the dominant source of broadening in a spectral line is homogeneous, its profile will be Lorentzian; when the dominant broadening is inhomogeneous, the profile will in general be Gaussian. Table \ref{tab:mgolinewidths} shows the results of these fits.
+Another idiosyncracy is that Site 2 exhibits numerous side bands in both excitation and emission at low temperatures. These extra peaks can be seen in Figure \ref{fig:mgosite2}, and a detail plot of some of them is given in Figure \ref{fig:site2sidebands}. The multiplicity of these peaks is too high for all of them to be associated with the same site. Thus, we conclude that they represent perturbations to the main Site 2, caused by small differences in the crystal structure some distance away from the \erbium ions. One possibility is that nearby Mg$^{2+}$ ions have been removed to compensate for the additional charge introduced by the \erbium ions, and that the different levels are due to different locations of these nearby Mg-vacancies in the crystal.
+
+A third idiosyncracy has to do with the brightest peak in the entire spectrum, which belongs to Site 3, and falls at roughly 6540 \wn\ in excitation. This peak is bimodal, as shown in Figure \ref{fig:site3peaks}. There are two explanations for this distribution. Either these two peaks correspond to different levels in the same site, or they correspond to the same level at two sites which are very similar. To emphasize the uncertainty of the numbering of these peaks, they have been marked with parentheses in Table \ref{tab:mgolevels}.
+
+\subsection{Crystal field modelling}
+Unimplanted MgO has a cubic crystal structure. In an environment with cubic symmetry, there are only two free crystal field parameters, and thus the task of fitting an experimentally determined spectrum to theory is feasible (see Section \ref{sec:crystal-fields}). Interestingly, however, neither Site 1, Site 2, or Site 4 have energy levels consistent with a cubic crystal environment. From this, we conclude that charge compensation when \erbium replaces Mg$^{2+}$ necessitates changes to the crystal structure surrounding the \erbium which break the cubic symmetry of the environment. A likely candidate is the removal of nearby Mg$^{2+}$ ions, which can occur in line with the \erbium ion two sites away, or diagonally from the \erbium ion, or possibly farther away.
+
+\begin{wraptable}{r}{0.5\textwidth}
+  \centering
+  \begin{tabular}{| c | c | c |}
+    \hline
+    $B_{4}$ & $B_{6}$ & SSE (cm$^{-2}$) \\
+    \hline
+    $-1.67\times 10^{-4}$ & $4.87\times 10^{-5}$ & $8.1\times 10^{-2}$ \\
+    $1.51\times 10^{-2}$ & $-1.58\times 10^{-6}$ & $7.8\times 10^{-2}$\\
+    \hline
+  \end{tabular}
+  \caption{Cubic crystal field parameters that reproduce the spectrum of Site 3 to within the resolution of the experiment.}
+  \label{tab:crystalfieldparams}
+\end{wraptable}
+
+The spectrum of Site 3, on the other hand, can be reproduced by a cubic crystal field model. Table \ref{tab:crystalfieldparams} shows the two sets of crystal field parameters which give accurate\footnote{Where accurate is defined to mean that the sum of squared errors of the energy levels is within the tolerances of the spectrometer resolution, roughly 1 \wn.} reproductions of the energy levels observed in Site 3. The fitting of these parameters must be taken with a grain of salt; since Site 3 only has two nontrivial energy levels,\footnote{$Z_{2}$ and $Z_{3}$ are not different enough to count separately for our purposes.} it is not surprising that it was possible to fit two parameters effectively; the problem is not overdetermined. Further investigation is warranted. For example, given a set of crystal field parameters, it is possible to calculate the matrix element between the different states, and thus the theoretical brightness of each transition. If the theoretical transition strengths match the observed transition strengths, it would be stronger evidence for the accuracy of one of these sets of parameters.
+
+Another route to inferring the remaining ground states of Site 3 is through the remaining visible emission lines in Figure \ref{fig:mgosite3}. As the temperature dependent data in Figure \ref{fig:mgotemp} show, these lower energy lines do not correspond to emission from $Y_{1}$, as they get relatively brighter with increasing temperature. By quantitatively studying the temperature dependence of their increasing brightness, we could deduce the $Y$ level from which they originate. From there, some of the remaining $Z$ levels could be calculated.
+
+
+\subsection{Linewidths and shapes}
+\label{sec:linewidths-shapes}
+PLE scans of MgO were taken at 13, 32, 60, and 106K. Taking the level assignments discussed above, the excitation peaks corresponding to excitation from $Z_{1}$ to $Y_{n}$ for all visible $Y_{n}$ were located for all four sites. For each of these peaks, two profiles were fitted, a Gaussian profile and a Lorentzian profile. When the dominant source of broadening in a spectral line is homogeneous, its profile will be Lorentzian; when the dominant broadening is inhomogeneous, the profile will in general be Gaussian. Table \ref{tab:mgolinewidths} shows the results of these fits.
 
 \begin{table}[t]
   \centering
@@ -385,14 +395,14 @@ Another route to inferring the remaining ground states of Site 3 is through the 
     \hline
     $n$ & 13K & 32K & 60K & 106K & 13K & 32K & 60K & 106K \\
     \hline
-    1 & $0.23$ & $0.26$ & $0.29$ & $0.41$ & $0.24$ & $0.26$ & $0.53$ & $1.17$ \\
-    2 & $0.84$ & $0.87$ & $0.91$ & $1.04$ & $0.40$ & $0.46$ & $0.73$ & *      \\
-    3 & $0.82$ & $0.86$ & $0.89$ & $1.01$ & *      & *      & *      & *      \\
+    1 & $[0.23]$ & $[0.26]$ & $0.29$ & $0.41$ & $0.24$ & $0.26$ & $0.53$ & $1.17$ \\
+    2 & $[0.84]$ & $[0.87]$ & $[0.91]$ & $1.04$ & $0.40$ & $0.46$ & $0.73$ & *      \\
+    3 & $[0.82]$ & $[0.86]$ & $[0.89]$ & $1.01$ & *      & *      & *      & *      \\
     4 & $0.29$ & $0.30$ & $0.33$ & $0.57$ & *      & *      & *      & *      \\
     5-8 & * & * & * & * & * & * & * & * \\
     \hline
   \end{tabular}
-  \caption{Fitted linewidths in \wn\ for all $Z_{1}Y_{n}$ excitation transitions in Sites 1, 2, 3, and 4, at 13, 32, 60, and 106 K. Peaks where a Gaussian distribution fit better than a Lorentzian based on the $R^{2}$ value of the fit are listed in parentheses. Peaks that were not visible are marked with an asterisk.}
+  \caption{Fitted linewidths in \wn\ for all $Z_{1}Y_{n}$ excitation transitions in Sites 1, 2, 3, and 4, at 13, 32, 60, and 106 K. Peaks where a Gaussian distribution fit better than a Lorentzian based on the $R^{2}$ value of the fit are listed in parentheses. Peaks with bimodal lineshapes that required further analysis are marked with square brackets. Peaks that were not visible are marked with an asterisk.}
   \label{tab:mgolinewidths}
 \end{table}
 
@@ -402,80 +412,82 @@ In general, the data were matched extremely well by one of these two distributio
   \centering
   \includegraphics[width=0.48\textwidth]{Site3_y1}
   \includegraphics[width=0.48\textwidth]{Site3_y2}
-  \caption{Excitation peaks at $Z_1Y_1$ (left) and $Z_1Y_2$ (right) in Site 3. The intensity profile discussed in Equation \eqref{eq:1} is fitted to the $Z_{1}Y_{2}$ data.}
+  \caption{Excitation peaks at $Z_1Y_1$ (left) and $Z_1Y_2$ (right) in Site 3. The intensity profile discussed in Equation \eqref{eq:1} is fitted to the $Z_{1}Y_{2}$ data. Fitted model parameters are: $a_{1} = 2.3$, $\Delta_{1} = 0.05$, $\Gamma_{1} = 0.28$, $a_{2} = 1.6$, $\Delta_{2} = -0.05$, $\Gamma_{2} = 0.28$, $\Gamma_{3} = 0.0025$, $b = 0.12$}
   \label{fig:site3peaks}
 \end{figure}
 
 Two transitions ($Z_{1}Y_{1}$ and $Z_{1}Y_{2}$ in Site 3) had distributions that clearly did not match either Lorentzian or Gaussian distributions at all. These features are shown in Figure \ref{fig:site3peaks}. The distributions are clearly bimodal. In the case of $Z_{1}Y_{1}$, it would be possible to interpret the feature as two closely-spaced Lorentzian distributions. In the case of $Z_{1}Y_{2}$, however, the two halves of the distribution are clearly skewed away from the center. We believe this is due to a strong second-order Stark shift on these energy levels. 
 
-To understand this, we first take a step back to discuss first-order Stark shifts and inhomogeneous broadening. The standard assumption underlying the Gaussian functional form associated with inhomogeneous broadening is that ions throughout the crystal experience different random electric fields $\mathbf{F}$, which are Gaussian distributed with zero mean. The energy levels are then shifted according to first-order perturbation theory, by diagonalizing the matrix 
+To understand this, we first take a step back to discuss first-order Stark shifts and inhomogeneous broadening. The standard assumption underlying the Gaussian functional form associated with inhomogeneous broadening is that ions throughout the crystal experience different random electric fields $\mathbf{F}$, which are Gaussian distributed with zero mean. The energy levels are then shifted according to first-order perturbation theory, by diagonalizing the matrix $V$ given by
 \begin{equation}\label{eq:2}
-
+  (V)_{ij} = -\mathbf{F}e\bra{\psi_{i}}\mathbf{r}\ket{\psi_{j}},
 \end{equation}
+where the indices $i$ and $j$ run over all eigenstates with the same energy. The key takeaway of this is that the shifts are linear in the applied field $\mathbf{F}$. Thus, since the distribution of electric fields $F$ is Gaussian, so must be the distribution of energy level shifts.
 
+However, if the electric dipole terms $\bra{\psi_{i}}\mathbf{r}\ket{\psi_{j}}$ of the eigenstates in question are all zero, there will be no first order Stark shift. In this case, we must go to second order in perturbation theory. The second-order shift to the energy of a state $E_{i}$ is 
+\begin{equation}\label{eq:8}
+E_{i}^{(2)} = \sum_{j\neq i }\frac{\bra{\psi_{i}}e\mathbf{F}\cdot\mathbf{r}\ket{\psi_{j}}\bra{\psi_{j}}e\mathbf{F}\cdot\mathbf{r}\ket{\psi_{i}}}{E_{i}^{(0)}-E_{j}^{(0)}}.
+\end{equation}
+Now, the perturbation is proportional to the square of applied electric field. Thus, still assuming a Gaussian distribution of fields, the distribution of perturbations is exponential. Whether the distribution lies to the left or right of zero depends on the sign of the second-order Stark shift.
 
-The form of the intensity $I$ as a function of the detuning $x$ is thus \begin{equation}\label{eq:1}
-  I(x) = N\int_{x'}dx'\frac{1}{x'^{2}+(\Gamma_{3}/2)^{2}}\Big(
+Understanding this, the distribution on the right side of Figure \ref{fig:site3peaks} looks a lot like two exponentials with tails facing in opposite directions. We designed an dummy intensity profile $I$ which corresponds to two exponential distributions facing in opposite directions, convolved with a Lorentzian distribution to model the contribution of the natural linewidth. $I$ as a function of the detuning $x$ is given by \begin{equation}\label{eq:1}
+  I(x) = b+N\int_{x'}dx'\frac{1}{x'^{2}+(\Gamma_{3}/2)^{2}}\Big(
     a_{1} D(x - \Delta_{1}) e^{-x/\Gamma_{1}} + a_{2}D(\Delta_{2}-x)e^{x/\Gamma_{2}}
   \Big) ,
 \end{equation}
-where $D$ is the Heaviside step function, $N$ is a normalization prefactor, $\Gamma_{1}$-$\Gamma_{3}$ are linewidth parameters, and $\Delta_{1}$-$\Delta_{2}$ are 
+where $D$ is the Heaviside step function, $N$ is a normalization prefactor, $b$ is the background intensity, $\Gamma_{1}$-$\Gamma_{3}$ are linewidth parameters, and $\Delta_{1}$-$\Delta_{2}$ are the offsets of the two exponential distributions.
 
+Figure \ref{fig:site3peaks} shows that the agreement between this fitted model and the data is very good. We thus conclude that this feature corresponds to two different features with opposite sign second-order Stark shifts. Whether these features belong to the same site or two different sites is unclear, but the former seems more likely than the latter due to their incredibly close spacing. The same question applies to the bimodal $Z_{1}Y_{1}$ feature at Site 3. For the purposes of simplicity, the $Z_{1}Y_{1}$ features has been treated as a single line throughout this analysis. However, due to their significant separation ($\sim 0.1$ \wn), the $Z_{1}Y_{2}$ features have been treated as two separate features, referred to as $Z_{1}Y_{2}$ and $Z_{1}Y_{3}$ throughout. To emphasize the uncertainty of this choice, the energy levels reported in Table \ref{tab:mgolevels} are marked with parentheses to indicate that the numbering is uncertain.
 
-\notetoself{In this section, I will discuss the findings of the linewidth analysis. I'm still working on it, but the goal is to fit both Gaussians and Lorentzians to the excitation peaks at $Z_{1}Y_{n}$, for all $n$, for all sites, for all temperatures. This will show when the lines are homogenously/inhomogeneously broadened, what the linewidths are, how they depend on temperature, and how things look at different sites. I'll also do a slightly more detailed discussion of the really bright, bimodal Site 3 peak. I will also include a table of the linewidths measured at each site by whichever functional form fit best, and the name of that functional form.}
+\subsection{Potential for single-ion applications}
+The observation of \erbium ions implanted in MgO is very exciting, because MgO has several desirable qualities as a potential host crystal. Magnesium and Oxygen both have stable isotopes with nuclear spin 0, so MgO can be made free of the nuclear spin problem that reduced coherence times in YSO. \erbium in MgO might therefore have substantially longer coherence times.
 
-\textbf{Potential for single-ion applications}: The observation of \erbium ions implanted in MgO is very exciting, because MgO has several desirable qualities as a potential host crystal. Magnesium and Oxygen both have stable isotopes with nuclear spin 0, so MgO can be made free of the nuclear spin problem that plagued YSO. This could enable substantially longer coherence times for \erbium spin qubits in MgO.
+Another quality of MgO that made it an exciting candidate host was its high level of symmetry. A highly symmetric crystal will typically reduce the static electric dipole moment of an implanted ion, and thus its susceptibility to inhomogeneous broadening via the first-order Stark effect. Our results do indeed show very narrow inhomogeneous linewidths for several of the sites, especially Site 2, where the smallest observed linewidth was around $2$ GHz and appeared to be naturally broadened. Interestingly, the only site that was inhomogeneously broadened at 13K was Site 3, the site which we showed to have no first-order Stark shift. It is surprising that the second order Stark effect at Site 3 is more substantial than the first order Stark effect at the other sites. It is not surprising, however, that Site 3 is both the only site which fit a cubic field model and the only site where the second order Stark effect was clearly visible. A cubic crystal environment would forbid a static electric dipole moment, and thus any first order Stark shift. Our results from crystal field modelling and from the analysis of lineshapes reinforce each other in this regard.
 
-
-
-
-\notetoself{Another factor is our ability to stamp photonic crystals on top. Can we do this for MgO? Is there evidence we will be able to?}
-
-\notetoself{The rest of this discussion depends a little bit on the linewidth findings. However, I'd like to discuss the strengths and weaknesses of the different sites. }
-
+MgO is therefore a very exciting potential host crystal. It has no nuclear spins, and very narrow inhomogeneous linewidths. It remains to be seen whether photonic crystal cavities with high quality factors can be attached to MgO. This is the next great hurdle. 
 
 
 \newpage
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site1_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site1_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively.}
-%   \label{fig:mgosite1}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site1_32K}\\
+  \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site1_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+  \label{fig:mgosite1}
+\end{figure}
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site2_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site2_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively.}
-%   \label{fig:mgosite2}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site2_32K}\\
+  \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site2_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+  \label{fig:mgosite2}
+\end{figure}
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site3_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site3_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. Emission lines for which no level assignment can be determined are plotted in yellow.}
-%   \label{fig:mgosite3}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site3_32K}\\
+  \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site3_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures. Emission lines for which no level assignment can be determined are plotted in yellow.}
+  \label{fig:mgosite3}
+\end{figure}
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site4_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site4_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure.}
-%   \label{fig:mgosite4}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site4_32K}\\
+  \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site4_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+  \label{fig:mgosite4}
+\end{figure}
 
 \begin{figure}[t]
   \centering
