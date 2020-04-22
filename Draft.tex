@@ -518,19 +518,28 @@ The array-detector-based emission spectrometer greatly sped up the acquisition o
 
 The other limitation is the signal to noise ratio itself, which is not high enough for us to see all the peaks we might be able to see with a less noisy detection scheme. For the array detector, there are three main sources of noise. One is the readout noise of the detectors, which contributes roughly 700 counts per bin per readout operation and thus a constant noise level of roughly 25 counts per bin per readout. Another is leakage, both from the room and from the excitation light, which cannot be completely filtered out of the detector. And the third is dark counts in the detector, which correspond to the black box thermal photons inside the detector. Because of the readout noise, you can improve your measurement somewhat by acquiring data for a longer time; however, due to the dark counts and bleedthrough which occur at a constant rate in time, the signal to noise ratio eventually begins to plateau and your measurement stops improving substantially with longer acquisition times. Furthermore, the bins fill up after roughly 7000 counts, putting a further limit on the maximum acquisition time per readout.
 
-The signal to noise ratio on the low-noise photodiode used for PLE is better than the signal to noise ratio on the array detector for the purposes of detecting the smallest signals possible. In part this is because a single detector simply introduces less noise than 1024 detectors. This has inspired the idea of using 
+The signal to noise ratio on the low-noise photodiode used for PLE is better than the signal to noise ratio on the array detector for the purposes of detecting the smallest signals possible. In part this is because a single detector simply introduces less noise than 1024 detectors. This has inspired the idea of using another of these low-noise photodiodes to build a Fourier transform spectrometer. This could provide several benefits over the current setup, including increased range and resolution, a higher signal to noise ratio, and no more need to focus through a slit. 
 
 
+% \begin{itemize}
+% \item What limits our ability to measure smaller signals with the commercial spectrometer? Why do we think Fourier transform spectroscopy could improve our ability to detect smaller signals?
 
-
-\begin{itemize}
-\item What limits our ability to measure smaller signals with the commercial spectrometer? Why do we think Fourier transform spectroscopy could improve our ability to detect smaller signals?
-
-\item There are other advantages as well - increased range, potentially increased resolution (with larger mirror travel), no need to focus through slit. Putting FT on the excitation side with a broad spectrum source could actually give a way to do 2D spectra over extremely wide regions.
-\end{itemize}
+% \item There are other advantages as well - increased range, potentially increased resolution (with larger mirror travel), no need to focus through slit. Putting FT on the excitation side with a broad spectrum source could actually give a way to do 2D spectra over extremely wide regions.
+% \end{itemize}
 
 
 \section{Principles of Fourier transform spectroscopy}
+
+The basic idea of a Fourier transform spectrometer is depicted in Figure 
+
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \includegraphics[width=]
+
+\end{wrapfigure}
+
+
 \begin{itemize}
 \item A small diagram of how FT spectroscopy works at the simplest level, and a discussion of how data is collected and processed
 
@@ -544,6 +553,14 @@ The signal to noise ratio on the low-noise photodiode used for PLE is better tha
 \end{itemize}
 
 \section{Implementation}
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=\textwidth]{FTIRSetupDiagram}
+  \caption{Diagram of our FTIR optical design.}
+  \label{fig:ftirdiagram}
+\end{figure}
+
 \begin{itemize}
 \item Optical design of our FT spectrometer 
 
