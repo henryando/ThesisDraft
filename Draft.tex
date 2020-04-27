@@ -116,9 +116,9 @@ As the theory developed throughout the 1990's, theorists began to discover probl
 
 But while quantum computers threaten to break classical factorization-based encryption methods, they create in exchange the possibility for physically un-interceptible encrypted communication. The oldest and most famous of these so-called \emph{quantum cryptography} schemes is the BB84 protocol for quantum key distribution. This protocol, which encodes information in the polarization states of photons, enables one party to send a private key to another in such a way that any attempt to intercept the message would be detectable to the receiver \cite{Bennett2014,Shor2000}. Another uniquely quantum communication procedure is \emph{teleportation}. In quantum teleportation, a qubit is transmitted from one party to another instantaneously across arbitrarily large distances. This doesn't violate the lightspeed limit for the transfer of information, because a qubit isn't information, and because the protocol requires a classical bit to be exchanged beforehand anyway \cite{Bennett1993}. 
 
-\notetoself{Here is a potential spot to talk about error correction. However, I'm not sure it's worth the space/time. For the moment, I'll leave only this reminder.}
+% \notetoself{Here is a potential spot to talk about error correction. However, I'm not sure it's worth the space/time. For the moment, I'll leave only this reminder.}
 
-Thus far, the theory of quantum algorithms and protocols has ranged far ahead of our ability to physically implement them. Over the years, a few broad classes of physical quantum computers have emerged as the most promising, each for slightly different types of problems. A few of these classes are:
+So far, the theory of quantum algorithms and protocols has ranged far ahead of the ability to physically implement them. Over the years, a few broad classes of physical quantum computers have emerged as the most studied, each for slightly different types of problems. A few of these classes are:
 \newcommand{\listheader}[1]{\textbf{#1}}
 \begin{itemize}
   
@@ -530,48 +530,88 @@ The signal to noise ratio on the low-noise photodiode used for PLE is better tha
 
 \section{Principles of Fourier transform spectroscopy}
 
-The basic idea of a Fourier transform spectrometer is depicted in Figure 
-
-
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}{r}{0.3\textwidth}
   \centering
-  \includegraphics[width=]
-
+  \includegraphics[width=0.23\textwidth]{FTIRMainIdea}
+  \caption{A Fourier transform spectrometer.}
+  \label{fig:ftirmainidea}
 \end{wrapfigure}
 
+The basic idea of a Fourier transform infrared spectrometer is depicted in Figure \ref{fig:ftirmainidea}. The infrared signal (magenta) is fed into a Michelson interferometer with one moving arm which sweeps back and forth, causing interference fringes. A different, narrow-linewidth laser in the visible spectrum (red) is fed in along the same beampath, and separated from the IR signal with a dichroic (blue). One detector measured the fringes in the visible spectrum reference laser, which are used to determine the position of the moving mirror at all time points. The IR signal coming out of the interferometer is measured simultaneously. Using the positions calculated from the red laser as the position axis, this signal is Fourier transformed into the spatial frequency domain. The frequency composition of the IR signal can thus be measured. 
 
-\begin{itemize}
-\item A small diagram of how FT spectroscopy works at the simplest level, and a discussion of how data is collected and processed
+The range and resolution of a FTIR spectrometer are deterined by physical properties of the system. The maximum measureable frequency is determined by the reference laser. The resolution is determined by the travel of the mirror. For two frequencies $\nu$ and $\nu+\delta\nu$ to be resolvable, the number of fringes you observe over the full travel of the mirror $L$ must be different by at least one, $N$ and $N+1$. Thus 
+\begin{equation}\label{eq:9}
+\delta \nu = \frac{1}{L}.
+\end{equation}
+So to achieve a frequency resolution of, for example, $1$ \wn\ we need the mirror to travel at least $1$ cm.
 
-\item What determines resolution? Range?
+Different types of noise are treated differently in FTIR spectroscopy. White noise, like dark counts in the detector, simply becomes white noise again in the Fourier domain. Bleedthrough from other parts of the experiment or the room are treated differently depending on how they enter the detector. If they enter the multi-mode signal fiber, they are Fourier transformed along with the signal. If they scatter randomly into the detector, however, they become white noise as well in the Fourier domain.
 
-\item How does noise work propagate through the Fourier Transform?
+The maximum scan speed is tied to the sampling rate of the detection scheme. In order to resolve the fringes of the reference laser, the speed of the mirror's travel must be limited so that the frequency of reference fringes in time (given by the mirror speed divided by the reference wavelength) is below the Nyquist frequency of the detector, i.e. one half of the sample rate.
 
-\item What is the minimum sampling rate? How do we determine this rate? Nyquist Theorem and DFT 
+The quality of the interferometer is tied to the signal to noise ratio of the spectrometer. The quality of the intereferometer is referred to as the ``contrast,'' and is measured as the peak-to-peak power variation of a narrow-linewidth coherent laser input divided by the total laser power at the detector (determined by blocking one arm of the interferometer, then the other, and adding the observed powers together).
 
-\item Why use Hann window in Fourier Tranform?
-\end{itemize}
+When taking the discrete Fourier transform of the signal, it is desirable to first multiply the signal by a window, like the Hann window,\footnote{The Hann window is a consine centered on the middle of the signal with a wavelength of the entire spatial domain. It is thus zero at the edges of the domain.} which reduces the contributions of the edges of the spatial domain signal. There are two reasons for this. One is that the DFT assumes that the signal obeys periodic boundary conditions, which in our case it does not; thus, reducing the contributions of the boundaries to zero helps us by enforcing periodic boundary conditions. The other is that the motion of the mirror is slower near the turning points at the boundaries, and the data from these regions are thus of lower resolution and quality than the data near the center of the scan. It is therefore altogether fitting and proper that we reduce the contributions of the signal near the edges of the domain.
+
+% \begin{itemize}
+% \item A small diagram of how FT spectroscopy works at the simplest level, and a discussion of how data is collected and processed
+
+% \item What determines resolution? Range?
+
+% \item How does noise work propagate through the Fourier Transform?
+
+% \item What is the minimum sampling rate? How do we determine this rate? Nyquist Theorem and DFT 
+
+% \item Why use Hann window in Fourier Tranform?
+% \end{itemize}
 
 \section{Implementation}
+
+An optical diagram of our FTIR spectrometer is given in Figure \ref{fig:ftirdiagram}. Both the reference laser (a HeNe laser at 633 nm) and the infrared signal are fiber coupled, and enter the setup through fiber collimators which are configured to focus as far away as possible (measured against the wall of the lab roughly 5 meters away). The beams are combined on a 1400 nm long-pass filter (LPF1). Rotation mounts on the fiber collimators, the subsequent IR mirror (M1), and the LPF allow the beam paths to be combined to high precision. This alignment was performed by placing an iris in the place of the removable mirror (M5), passing the beams through it, and aligning them in the far field. Accuracy was ensured by placing a beamsplitter immediately after the iris to ensure the power passing through the iris was maximal. This alignment ensures that the angular alignment of the two beams is within $\sim 0.1\%$.
 
 \begin{figure}[b]
   \centering
   \includegraphics[width=\textwidth]{FTIRSetupDiagram}
-  \caption{Diagram of our FTIR optical design.}
+  \caption{The optical design of our FTIR spectrometry setup. 1400 nm long-pass filters are marked in blue. A removable mirror is marked by a dotted line; when the mirror is taken out, the beams travel 3 meters to an alignment mark in the far field. }
   \label{fig:ftirdiagram}
 \end{figure}
 
-\begin{itemize}
-\item Optical design of our FT spectrometer 
+Next, the combined beams pass through a 50:50 beamsplitter (BS). One arm of the beamsplitter consists of a single mirror (M3) which return the beam along its original path. The other arm of the beamsplitter consists of a corner cube reflector attached to a speaker cone. The corner cube returns the incoming beam along a beampath parallel to the incoming beam regardless of orientation, which makes the interferometer relatively insensitive to slight rotations of the corner cube as the speaker cone moves in and out. The parallel beam is then reflected off another mirror (M4) and returns along the original path to be interfered with the M3 beam at the beamsplitter. Because the beam passes through the corner cube twice, the total beam path displacement is four times the travel of the corner cube, increasing the resolution by a factor of two over schemes where the beam only reflects off the moving surface once.
 
-\item Alignment precision and contrast
+The alignment of the moving arm of the interferometer is performed by removing the removable mirror M5, and adjusting the rotation of M4 until the beams from the two arms are aligned in the far field. If the alignment is good, flickering will be visible. Next, the mirror M5 is replaced, and the different frequencies of light are focused onto their respective detectors after being separated by another long pass filter (LPF2). The alignment of M4 is refined by sweeping the speaker to generate fringes, then maximizing the contrast of the fringes on the reference detector.
 
-\item Data collection electronics 
+Next, the path lengths of the two arms of the interferometer must be equalized so that the zero path length point occurs in the middle of each sweep of the moving arm. For this step, a fiber-coupled infrared LED with a linewidth of tens of nanometers is used as an input to the infrared side of the interferometer. Since the Fourier transform of this signal is something like a sine wave with an envelope whose width is inversely related to the width of 
 
-\item Data processing 
-\end{itemize}
+% \begin{itemize}
+% \item Optical design of our FT spectrometer 
+
+% \item Alignment precision and contrast
+
+% \item Data collection electronics 
+
+% \item Data processing 
+% \end{itemize}
 
 \section{Characterization}
+
+In our experiment, the signal from the photodiodes is read out by a National Instruments DAQ card whose sample rate is limited to 12500 samples per second, which is lower than the bandwidth of the photodiode; thus, the maximum speed of our measurements is limited by the sample rate. The scans must be performed slow enough that the fringes of the reference laser occur at a lower frequency than the Nyquist frequency of the detector, i.e. half the sampling frequency.
+
+This sets an upper bound on the scan rate. It is also worth noting that scanning slower than this rate is not advantageous. The discrete Fourier Transform (DFT) of a sine curve with frequency $\omega_{0}$, sampled at intervals of $\delta$, and with Gaussian distributed white noise $\eta(t)$, is 
+\begin{equation}\label{eq:10}
+\tilde f_{k} = \sum_{n=0}^{N-1}\left(\sin (\omega_{0}n\delta) +\eta(n\delta)\right)e^{-\frac{2\pi i}{N}nk}. 
+\end{equation}
+If we double the sampling rate, the new DFT is 
+\begin{align}
+  \tilde f'_{k}
+  =& \sum_{n=0}^{2N-1}\Big(\sin(\omega_{0}n\delta/2) + \eta(\n\delta/2)\Big)e^{-\frac{2\pi i}{2N}nk}\nonumber \\
+  =& \sum_{n=0}^{N-1}\Big(\sin(\omega_{0}n\delta)+\eta(n\delta)\Big)e^{-\frac{2\pi i}{N}nk}\nonumber \\
+  &+ \sum_{n=0}^{N-1}\Big(\sin\big(\omega_{0}(n+1/2)\delta\big) + \eta\big((n + 1/2)\delta\big) \Big)e^{-\frac{2\pi i}{N}(n+\frac{1}{2})k}.
+  \label{eq:11}
+\end{align}
+After normalizing for the extra samples, we find that this calculation essentially amounts to averaging together two different scans. Thus, it is preferable to operate the scans as fast as the Nyquist frequency of the detector allows, and if averaging is necessary, to simply perform multiple independent scans rather than slow down the scan speed of a single scan.  
+
+
+
 \begin{itemize}
 \item Resolution
 
