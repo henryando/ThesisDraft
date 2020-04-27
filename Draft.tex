@@ -580,7 +580,15 @@ Next, the combined beams pass through a 50:50 beamsplitter (BS). One arm of the 
 
 The alignment of the moving arm of the interferometer is performed by removing the removable mirror M5, and adjusting the rotation of M4 until the beams from the two arms are aligned in the far field. If the alignment is good, flickering will be visible. Next, the mirror M5 is replaced, and the different frequencies of light are focused onto their respective detectors after being separated by another long pass filter (LPF2). The alignment of M4 is refined by sweeping the speaker to generate fringes, then maximizing the contrast of the fringes on the reference detector.
 
-Next, the path lengths of the two arms of the interferometer must be equalized so that the zero path length point occurs in the middle of each sweep of the moving arm. For this step, a fiber-coupled infrared LED with a linewidth of tens of nanometers is used as an input to the infrared side of the interferometer. Since the Fourier transform of this signal is something like a sine wave with an envelope whose width is inversely related to the width of 
+Next, the path lengths of the two arms of the interferometer must be equalized so that the zero path length point occurs in the middle of each sweep of the moving arm. For this step, a fiber-coupled infrared LED with a linewidth of tens of nanometers is used as an input to the infrared side of the interferometer. The Fourier transform of this signal is roughly a sine wave multiplied by an envelope whose width is inversely related to the linewidth of the signal. Since the width of this envelope is on the order of half a millimeter, the zero path length point shows up in the swept IR signal as a narrow peak surrounded by flat background. The mirror M3 is then translated forward and backward on a translation stage until the zero path length point is located and centered in the scan.
+
+At this point, the rotational alignment of the mirror M3 is adjusted to once again optimize contrast, as the translation stage introduces small angular displacements. After adjusting the lens in front of the infrared photodiode to maximize the signal, the setup is prepared for data acquisition.
+
+To take a scan, the frequency on the function generator which powers the speaker is adjusted to the appropriate scan frequency (discussed further in Section \ref{sec:characterization}). The data acquisition device is configured to measure, at maximum sample rate, the output signal of both photodiodes and the synchronization pulse of the function generator. These outputs are recorded and saved.\footnote{In the future, data processing will be handled in real time to reduce file sizes.}
+
+The data processing occurs in three steps. First, individual sweeps are separated from one another using the synchronization pulses from the function generator. Next, the samples are rebased from the time domain to the spatial domain. The zero crossing points of the reference signal are identified. The IR signal data between each zero crossing point and the next is averaged together, becoming a single data point on the new axis of spatially indexed data, where each point is separated from the next by half the reference wavelength (316.5 nm). Third and finally, this spatially indexed data is Fourier transformed using a Hann window into the spatial frequency domain. 
+
+
 
 % \begin{itemize}
 % \item Optical design of our FT spectrometer 
@@ -593,6 +601,7 @@ Next, the path lengths of the two arms of the interferometer must be equalized s
 % \end{itemize}
 
 \section{Characterization}
+\label{sec:characterization}
 
 In our experiment, the signal from the photodiodes is read out by a National Instruments DAQ card whose sample rate is limited to 12500 samples per second, which is lower than the bandwidth of the photodiode; thus, the maximum speed of our measurements is limited by the sample rate. The scans must be performed slow enough that the fringes of the reference laser occur at a lower frequency than the Nyquist frequency of the detector, i.e. half the sampling frequency.
 
@@ -608,7 +617,7 @@ If we double the sampling rate, the new DFT is
   &+ \sum_{n=0}^{N-1}\Big(\sin\big(\omega_{0}(n+1/2)\delta\big) + \eta\big((n + 1/2)\delta\big) \Big)e^{-\frac{2\pi i}{N}(n+\frac{1}{2})k}.
   \label{eq:11}
 \end{align}
-After normalizing for the extra samples, we find that this calculation essentially amounts to averaging together two different scans. Thus, it is preferable to operate the scans as fast as the Nyquist frequency of the detector allows, and if averaging is necessary, to simply perform multiple independent scans rather than slow down the scan speed of a single scan.  
+After normalizing for the extra samples, we find that $f'$ is effectively the average of two completely separate scans at the original sampling frequency. The noise level thus decreases as the square root of the time taken, exactly the same as it would if several scans at the original scan rate were recorded. Thus, it is preferable to operate the scans as fast as the Nyquist frequency of the detector allows, and if averaging is necessary, to simply perform multiple independent scans rather than slow down the scan speed of a single scan. This is because the response of the speaker to being driven by the function generator becomes less reliable at lower frequencies.
 
 
 
