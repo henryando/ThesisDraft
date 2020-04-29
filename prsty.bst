@@ -448,11 +448,11 @@ FUNCTION {format.pub.add.year.etc}
   publisher empty$
     { "PUBLISHER" "No publisher for entry " cite$ "." * * warning$ }
     { publisher }
-  if$
-  ", " * *
-  address empty$
-    { "ADDRESS" "Missing address in entry " cite$ * "." * warning$ }
-    { address }
+  % if$
+  % ", " * *
+  % address empty$
+  %   { "ADDRESS" "Missing address in entry " cite$ * "." * warning$ }
+  %   { address }
   if$
   ", " * *
   year empty$

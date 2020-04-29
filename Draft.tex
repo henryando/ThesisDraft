@@ -51,9 +51,6 @@
 \newcommand{\YSO}[1][ ]{Y$_{2}$SiO$_{5}$#1}
 \newcommand{\ErYSO}[1][ ]{Er$^{3+}$:Y$_{2}$SiO$_{5}$#1}
 \newcommand{\TiO}[1][ ]{TiO$_{2}$#1}
-\newcommand{\MgO}[1][ ]{MgO#1}
-\newcommand{\MgO2}[1][ ]{MgO$^{2+}$#1}
-\newcommand{\O2}[1][ ]{O$^{2-}$#1}
 \newcommand{\supercite}[1]{$^{\text{\cite{#1}}}$}
 \graphicspath{{Figures/}}
 \newcommand{\notetoself}[1]{\textcolor{red}{#1}}
@@ -112,7 +109,7 @@
 
 Humans have studied the stars since the beginning of recorded history, and the ancient Greeks were already wondering about the building blocks of reality. Thus, relative to astrophysics or particle physics, quantum computing could be considered a fairly new field. Quantum computers were originally proposed in the early 1980's as a means of simulating quantum many-body problems that are intractible on classical computers \cite{Feynman1982}. The groundwork of the theory was originally laid out largely by Benioff and Feynman \cite{Benioff1980,Feynman1982}. Toffoli created the first set of universal, reversible quantum logic gates \cite{Toffoli1980}. The no-cloning theorem, which states that \textit{qubits}\footnote{ Qubits, short for quantum bits, are two-element quantum spinors. Photon polarization and electron spin are common examples. A quantum computer has several qubits and performs unitary gates on them analogously } cannot be copied, was proved by Wootters and Zurek \cite{Wootters1982}. In 1985, Deutsch proposed the first model for a universal quantum computer \cite{Deutsch1985}.
 
-As the theory developed throughout the 1990's, theorists began to discover problems whose computational complexity could be vastly reduced on quantum computers. The first example, the Deutsch-Josza algorithm for determining whether a black-box function is either constant or balanced, is of little practical use but inspired many later such algorithms \cite{Deutsch1992}. Another important such discovery is Grover's algorithm for database searches, which offers a quadratic speedup over the classical version \cite{Grover1996}. Perhaps the most important of these discoveries, however, was Shor's algorithm (proposed in 1994), which provides an exponential speedup on the discrete logarithm and large integer factorization problems \cite{Shor1994}. Since most modern telecommunications\footnote{ and thus most of the internet.} are encrypted using RSA encryption schemes which rely on the difficulty of factorizing products of large prime numbers, a real quantum computer capable of running Shor's algorithm would instantly break the encryption on almost the entire internet. It was this discovery which catapulted the field of quantum computing from being an interesting physics experiment to a global arms race involving the governments of the United States and China,\footnote{ among others.} as well as tech companies such as Google, IBM, and Microsoft. 
+As the theory developed throughout the 1990's, theorists began to discover problems whose computational complexity could be vastly reduced on quantum computers. The first example, the Deutsch-Josza algorithm for determining whether a black-box function is either constant or balanced, is of little practical use but inspired many later such algorithms \cite{Deutsch1992}. Another important such discovery is Grover's algorithm for database searches, which offers a quadratic speedup over the classical version \cite{Grover1996}. Perhaps the most important of these discoveries, however, was Shor's algorithm (proposed in 1994), which provides an exponential speedup on the discrete logarithm and large integer factorization problems \cite{Shor1999}. Since most modern telecommunications\footnote{ and thus most of the internet.} are encrypted using RSA encryption schemes which rely on the difficulty of factorizing products of large prime numbers, a real quantum computer capable of running Shor's algorithm would instantly break the encryption on almost the entire internet. It was this discovery which catapulted the field of quantum computing from being an interesting physics experiment to a global arms race involving the governments of the United States and China,\footnote{ among others.} as well as tech companies such as Google, IBM, and Microsoft. 
 
 But while quantum computers threaten to break classical factorization-based encryption methods, they create in exchange the possibility for physically un-interceptible encrypted communication. The oldest and most famous of these so-called \emph{quantum cryptography} schemes is the BB84 protocol for quantum key distribution. This protocol, which encodes information in the polarization states of photons, enables one party to send a private key to another in such a way that any attempt to intercept the message would be detectable to the receiver \cite{Bennett2014,Shor2000}. Another uniquely quantum communication procedure is \emph{teleportation}. In quantum teleportation, a qubit is transmitted from one party to another instantaneously across arbitrarily large distances. This doesn't violate the lightspeed limit for the transfer of information, because a qubit isn't information, and because the protocol requires a classical bit to be exchanged beforehand anyway \cite{Bennett1993}. 
 
@@ -147,14 +144,14 @@ This transition, however, is very slow, with a natural linewidth on the order of
 \begin{figure}[b]
   \centering
   \includegraphics[width=0.8\textwidth]{Nanophotonics}
-  \caption{A lensed fiber couples into a silicon photonic cavity stamped on top of an \erbium[]-doped \YSO crystal. Red arrows represent the spins of \erbium ions in the crystal substrate. Figure from \cite{Dibos2017}.}
+  \caption{A lensed fiber couples into a silicon photonic cavity stamped on top of an \erbium[]-doped \YSO crystal. Red arrows represent the spins of \erbium ions in the crystal substrate. Figure from \cite{Dibos2018}.}
   \label{fig:cavity}
 \end{figure}
 
 
-Previous work by the Thompson lab has shown that by stamping silicon nanophotonic cavities on top of crystals doped with \erbium ions, the emission rate can be enhanced by 600 times via the Purcell effect \cite{Dibos2017}. Figure \ref{fig:cavity} shows a graphic of this scheme. This approach is very promising - however, the crystal substrate could be improved in numerous ways. For one thing, this work used \YSO[], a crystal with relatively strong nuclear spins. These nuclear spins substantially limit the coherence times of the \erbium spin qubits embedded in the crystal. Another other issue is that the density of \erbium ions is high enough in the bulk-doped \YSO that tens to hundreds of ions couple to the cavity, preventing simple frequency-based resolution of the different ions each cavity couples to, and reducing coherence times further due to electric dipole interactions between nearby \erbium ions. Finally, a different crystal field configuration could potentially increase the emission rate further, by increasing the matrix element between the ground and excited state wavefunctions.\footnote{The \erbium telecom transition is electric dipole forbidden. Small perturbations to the electronic wavefunctions can thus make substantial relative differences to the matrix element between the ground and excited states. The spectroscopic properties of \erbium are discussed in more detail in Section \ref{sec:spectr-prop-erbi}.}
+Previous work by the Thompson lab has shown that by stamping silicon nanophotonic cavities on top of crystals doped with \erbium ions, the emission rate can be enhanced by 600 times via the Purcell effect \cite{Dibos2018}. Figure \ref{fig:cavity} shows a graphic of this scheme. This approach is very promising - however, the crystal substrate could be improved in numerous ways. For one thing, this work used \YSO[], a crystal with relatively strong nuclear spins. These nuclear spins substantially limit the coherence times of the \erbium spin qubits embedded in the crystal. Another other issue is that the density of \erbium ions is high enough in the bulk-doped \YSO that tens to hundreds of ions couple to the cavity, preventing simple frequency-based resolution of the different ions each cavity couples to, and reducing coherence times further due to electric dipole interactions between nearby \erbium ions. Finally, a different crystal field configuration could potentially increase the emission rate further, by increasing the matrix element between the ground and excited state wavefunctions.\footnote{The \erbium telecom transition is electric dipole forbidden. Small perturbations to the electronic wavefunctions can thus make substantial relative differences to the matrix element between the ground and excited states. The spectroscopic properties of \erbium are discussed in more detail in Section \ref{sec:spectr-prop-erbi}.}
 
-Unfortunately, using bulk doping methods it is impossible to grow crystals with lower concentrations of \erbium than in this previous work \cite{Dibos2017}. The Thompson lab has thus turned to ion implantation to achieve lower doses of \erbium in new potential crystal hosts.\footnote{Ion implantation is a process by which ions are accelerated into the surface of a crystal, and become lodged in the structure of the crystal. More information on this process is given in Section } Last fall, it was shown that \erbium could be successfully implanted in \TiO[]. The implanted \erbium had narrow optical linewidths, and \TiO has no nuclear spins, so this was an exciting result \cite{Phenicie2019}. However, the quality factor of photonic crystals on \TiO could never be made high enough, likely due to the poor telecom transparency of \TiO[].
+Unfortunately, using bulk doping methods it is impossible to grow crystals with lower concentrations of \erbium than in this previous work \cite{Dibos2018}. The Thompson lab has thus turned to ion implantation to achieve lower doses of \erbium in new potential crystal hosts.\footnote{Ion implantation is a process by which ions are accelerated into the surface of a crystal, and become lodged in the structure of the crystal. More information on this process is given in Section } Last fall, it was shown that \erbium could be successfully implanted in \TiO[]. The implanted \erbium had narrow optical linewidths, and \TiO has no nuclear spins, so this was an exciting result \cite{Phenicie2019}. However, the quality factor of photonic crystals on \TiO could never be made high enough, likely due to the poor telecom transparency of \TiO[].
 
 In the interests of discovering better potential host crystals, a large batch of crystals was implanted with \erbium ions. For all these implanted crystals, it was necessary to determine experimentally whether \erbium was visible in the crystal, and if so, to determine its spectral properties to begin understanding how \erbium ions in this crystal would perform for single ion applications. Where are the emission and excitation lines? How bright and broad are they? What can we learn about how the \erbium ions are sitting in the crystal lattice? These are the questions that motivate this work. Before laying out our methods and results, we first provide some theoretical background about \erbium and crystals.
 
@@ -414,7 +411,7 @@ PLE scans of MgO were taken at 13, 32, 60, and 106K. Taking the level assignment
   \label{tab:mgolinewidths}
 \end{table}
 
-In general, the data were matched extremely well by one of these two distributions. Mostly, the best fits were Lorentzian, which is significant as it indicates that the inhomogeneous linewidths of these sites are quite small. For Sites 1, 3, and 4, the inhomogeneous linewidths must be less than 0.3 \wn\ FWHM at 13K, and for Site 2 they can be as low as 0.06 \wn. This is significant, as narrow inhomogeneous linewidths are desirable for our single-ion applications \cite{Dibos2017}.
+In general, the data were matched extremely well by one of these two distributions. Mostly, the best fits were Lorentzian, which is significant as it indicates that the inhomogeneous linewidths of these sites are quite small. For Sites 1, 3, and 4, the inhomogeneous linewidths must be less than 0.3 \wn\ FWHM at 13K, and for Site 2 they can be as low as 0.06 \wn. This is significant, as narrow inhomogeneous linewidths are desirable for our single-ion applications \cite{Dibos2018}.
 
 \begin{figure}[b]
   \centering
@@ -457,55 +454,55 @@ MgO is therefore a very exciting potential host crystal. It has no nuclear spins
 
 \newpage
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site1_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site1_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
-%   \label{fig:mgosite1}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site1_32K}\\
+  \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site1_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+  \label{fig:mgosite1}
+\end{figure}
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site2_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site2_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
-%   \label{fig:mgosite2}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site2_32K}\\
+  \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site2_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+  \label{fig:mgosite2}
+\end{figure}
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site3_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site3_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures. Emission lines for which no level assignment can be determined are plotted in yellow.}
-%   \label{fig:mgosite3}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site3_32K}\\
+  \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site3_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures. Emission lines for which no level assignment can be determined are plotted in yellow.}
+  \label{fig:mgosite3}
+\end{figure}
 
-% \begin{figure}[b]
-%   \centering
-%   \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site4_32K}\\
-%   \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
-%   \includegraphics[scale=0.97]{JinD_site4_106K}
-%   \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
-%   \label{fig:mgosite4}
-% \end{figure}
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
+  \includegraphics[scale=0.97]{JinD_site4_32K}\\
+  \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
+  \includegraphics[scale=0.97]{JinD_site4_106K}
+  \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
+  \label{fig:mgosite4}
+\end{figure}
 
-% \begin{figure}[t]
-%   \centering
-%   \includegraphics[scale=0.75]{JinD_site1_temp}
-%   \includegraphics[scale=0.75]{JinD_site2_temp}
-%   \includegraphics[scale=0.75]{JinD_site3_temp}
-%   \includegraphics[scale=0.75]{JinD_site4_temp}
-%   \caption{Temperature dependence of emission spectrum in MgO, excited at $Z_{1}Y_{1}$, for Sites 1, 2, 3, and 4, from top to bottom. Each peak is labeled with its corresponding emission transition.}
-%   \label{fig:mgotemp}
-% \end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=0.75]{JinD_site1_temp}
+  \includegraphics[scale=0.75]{JinD_site2_temp}
+  \includegraphics[scale=0.75]{JinD_site3_temp}
+  \includegraphics[scale=0.75]{JinD_site4_temp}
+  \caption{Temperature dependence of emission spectrum in MgO, excited at $Z_{1}Y_{1}$, for Sites 1, 2, 3, and 4, from top to bottom. Each peak is labeled with its corresponding emission transition.}
+  \label{fig:mgotemp}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -636,15 +633,7 @@ The next characterization of the FTIR spectrometer we performed was on a broad s
   \label{fig:LED}
 \end{figure}
 
-Now tested on arbitrarily narrow signal. Findings:
-SNR
-FWHM
-Accuracy
-Important to discuss that this is cheap IR PD
-Photon per second resolution?
-2.00e+14 photons per second in toptica beam
-What is proposed SNR gain with fance PD?
-
+Next, we tested the FTIR spectrometer on a stable, narrow linewidth laser signal from the Toptica tunable diode laser used in the excitation spectroscopy. The linewidth of this laser is on the order of MHz, so it is arbitrarily narrow for the purposes of our spectrometer. The raw signal from this laser thus looks like a pure sine wave in the spatial domain. The interference contrast is quite good, roughly $95$-$98\%$ neglecting room light (contrast varies slightly over the course of the scan).
 
 \begin{figure}[t]
   \centering
@@ -653,19 +642,36 @@ What is proposed SNR gain with fance PD?
   \label{fig:toptica}
 \end{figure}
 
+An example Fourier transform spectrum of this laser is shown in Figure \ref{fig:toptica}. For this spectrum, the wavelength of the laser was set to 6531.7 \wn and the power was reduced as low as it could stably go, to 26 $\mu$W. The Gaussian fit in Figure \ref{fig:toptica} shows that the FTIR spectrometer accurately determined the wavelength of the laser, with the peak being centered at $6531.7\pm 0.2$ \wn[.] Moreover, the linewidth extraced from this fit is $2.39\pm 0.17$ \wn FWHM, which supports the resolution of $2.3 $ \wn which we calculated from the travel range. 
 
+The signal-to-noise ratio of this signal is roughly $6.4\times 10^{9}$. The most meaningful point of comparison for this is the array detector spectrometer. The array detector has roughly 700 counts per bin of readout noise, plus 100 dark counts per second. Thus, over a two second acquisition,\footnote{Two seconds was chosen for direct comparison to the two seconds it takes to do a FTIR scan.} we expect an average of 900 noise counts. The 26 $\mu W$ laser at $6532$ \wn contains $2\times 10^{14}$ photons per second, so the signal to noise ratio we would get with the array detector is roughly $4.4\times 10^{12}$. Thus, the current iteration of the FTIR spectrometer has a signal-to-noise ratio roughly three orders of magnitude worse than the array detector spectrometer. However, it is very important to note that the current version of the FTIR spectrometer uses a cheaper InGaAs IR photodiode, which was not even being operated at its maximum gain. The gain on the existing InGaAs could be raised 20 dB higher except the signal was too large. We therefore expect that, given a smaller signal, the InGaAs PD could achieve a signal-to-noise ratio only one order of magnitude worse than the array detector. Then, by switching to the fancier low-noise photodiode used in PLE spectroscopy, we could improve the signal-to-noise ratio by several additional orders of magnitude, making FTIR spectroscopy substantially more precise than the array detector. Unfortunately, labs were closed before this testing was possible.
 
+\section{Future directions}
 
-  
-\begin{itemize}
-\item Resolution
+There are still two hurdles for the FTIR spectrometer to clear. The first is switching the IR input fiber from single-mode to multi-mode. The main difficulty this could impose is that different beam modes accumulate phase factors slightly differently over distances, and thus could fail to constructively interfere at the same rate, reducing the interference contrast. The electric fields for the different Hermite-Gaussian modes are given by \cite{RP}:
+\begin{align}\label{eq:12}
+  E_{nm}(x,y,z) =& E_{0}\frac{w_{0}}{w(z)}
+  H_{n}\left(\frac{\sqrt{2}x}{w(z)}\right)\exp\left(-\frac{x^{2}}{w(z)^{2}}\right)
+  H_{m}\left(\frac{\sqrt{2}y}{w(z)}\right)\exp\left(-\frac{y^{2}}{w(z)^{2}}\right)
+ \nonumber \\ &\exp\left(-i\left[kz-(1+n+m)\tan^{-1}\frac{z}{z_{R}}+\frac{k(x^{2}+y^{2})}{2R(z)}\right]\right),
+\end{align}
+where $H_{n}$ is the $n$th Hermite polynomial, $w_{0}$ is the beam waist, $w(z)$ is the beam width at $z$, $R(z)$ is the radius of curvature, and $z_{R}$ is the Rayleigh length,
+\begin{equation}\label{eq:13}
+z_{R} = \frac{\pi w_{0}^{2}}{\lambda}.
+\end{equation}
+The only phase term which depends on $n$ and $m$ is the arctan term
+\begin{equation}\label{eq:14}
+(1+n+m)\tan^{-1}\frac{z}{z_{R}}.
+\end{equation}
+For our beams, $\lambda \approx 1500$ nm and $w_{0} \approx 1$ mm. This gives $z_{R}\approx 2$ meters. Since the relevant path length differences are on the order of millimeters, we expect that this term will be small, and thus the dispersion between different modes will have a fairly minor effect on the interference contrast.
 
-\item Signal to noise 
+The other hurdle the FTIR spectrometer must clear has to do with the chopping of the signal. When acquiring excitation-emission spectra, the excitation laser is chopped exactly out of phase with the emission signal. This is to fully block the excitation laser from entering the emission detector. With the array detector, the signal is integrated over hundreds of these chopped pulses, so their effect is negligible. With FTIR spectroscopy, however, the chopped pulses multiply the raw signal by roughly a square wave. This means that if $f(x)$ is the un-chopped IR signal, and $g(x)$ is the chopping function, then the Fourier transform $\hat{h}(k)$ is given by the convolution of $\hat{f}$ and $\hat{g}$:
+\begin{equation}\label{eq:15}
+\hat{h}(k) = \int_{-\infty}^{\infty}dxf(x)g(x)e^{-2\pi i x k} = (f * g)(k) = \int_{-\infty}^{\infty}dk'\hat{f}(k)\hat{g}'(k'-k).
+\end{equation}
+The Fourier transform of the chopping, $\hat{g}(k)$, will consist of a fundamental frequency at the chopping frequency with higher harmonics. To obtain the IR spectrum, the two signal will have to be de-convolved. Moreover, the chopping rate is constant in time, but the relationship between time and distance is not a simple linear function; rather, the mirror speeds up and slows down over the course of its scan. Thus, there will be some uncertainty in the chopping frequency. This will decrease the resolution of the spectrometer somewhat. This effect can be decreased by driving the speaker with a triangle wave instead of a sine wave.
 
-\item Future characterization, which was blocked due to coronavirus 
-
-\item Will this be a useful part of the experiment?
-\end{itemize}
+Despite the further testing required, FTIR spectroscopy shows substantial promise in the context of our experiment. It offers possibilities to do emission spectroscopy with substantially lower signal-to-noise ratios, increased resolution, and wider wavelength ranges.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
