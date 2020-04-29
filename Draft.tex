@@ -57,7 +57,7 @@
 \newcommand{\supercite}[1]{$^{\text{\cite{#1}}}$}
 \graphicspath{{Figures/}}
 \newcommand{\notetoself}[1]{\textcolor{red}{#1}}
-\newcommand{\wn}{cm$^{-1}$}
+\newcommand{\wn}[1][ ]{cm$^{-1}$#1}
 
 % Tweak float placements
 \renewcommand{\topfraction}{0.85}  % max fraction of floats at top
@@ -518,15 +518,7 @@ The array-detector-based emission spectrometer greatly sped up the acquisition o
 
 The other limitation is the signal to noise ratio itself, which is not high enough for us to see all the peaks we might be able to see with a less noisy detection scheme. For the array detector, there are three main sources of noise. One is the readout noise of the detectors, which contributes roughly 700 counts per bin per readout operation and thus a constant noise level of roughly 25 counts per bin per readout. Another is leakage, both from the room and from the excitation light, which cannot be completely filtered out of the detector. And the third is dark counts in the detector, which correspond to the black box thermal photons inside the detector. Because of the readout noise, you can improve your measurement somewhat by acquiring data for a longer time; however, due to the dark counts and bleedthrough which occur at a constant rate in time, the signal to noise ratio eventually begins to plateau and your measurement stops improving substantially with longer acquisition times. Furthermore, the bins fill up after roughly 7000 counts, putting a further limit on the maximum acquisition time per readout.
 
-The signal to noise ratio on the low-noise photodiode used for PLE is better than the signal to noise ratio on the array detector for the purposes of detecting the smallest signals possible. In part this is because a single detector simply introduces less noise than 1024 detectors. This has inspired the idea of using another of these low-noise photodiodes to build a Fourier transform spectrometer. This could provide several benefits over the current setup, including increased range and resolution, a higher signal to noise ratio, and no more need to focus through a slit. 
-
-
-% \begin{itemize}
-% \item What limits our ability to measure smaller signals with the commercial spectrometer? Why do we think Fourier transform spectroscopy could improve our ability to detect smaller signals?
-
-% \item There are other advantages as well - increased range, potentially increased resolution (with larger mirror travel), no need to focus through slit. Putting FT on the excitation side with a broad spectrum source could actually give a way to do 2D spectra over extremely wide regions.
-% \end{itemize}
-
+The signal to noise ratio on the low-noise photodiode used for PLE is better than the signal to noise ratio on the array detector for the purposes of detecting the smallest signals possible. In part this is because a single detector simply introduces less noise than 1024 detectors. This has inspired the idea of using another of these low-noise photodiodes to build a Fourier transform spectrometer. This could provide several benefits over the current setup, including increased range and resolution, a higher signal to noise ratio, and no more need to focus through a slit. Additionally, if this technology is effective, the excitation source could be switched to a broad spectrum white light source and fed through a different Fourier transform setup, enabling study of a wider range of excitation wavelengths as well. 
 
 \section{Principles of Fourier transform spectroscopy}
 
@@ -553,18 +545,6 @@ The quality of the interferometer is tied to the signal to noise ratio of the sp
 
 When taking the discrete Fourier transform of the signal, it is desirable to first multiply the signal by a window, like the Hann window,\footnote{The Hann window is a consine centered on the middle of the signal with a wavelength of the entire spatial domain. It is thus zero at the edges of the domain.} which reduces the contributions of the edges of the spatial domain signal. There are two reasons for this. One is that the DFT assumes that the signal obeys periodic boundary conditions, which in our case it does not; thus, reducing the contributions of the boundaries to zero helps us by enforcing periodic boundary conditions. The other is that the motion of the mirror is slower near the turning points at the boundaries, and the data from these regions are thus of lower resolution and quality than the data near the center of the scan. It is therefore altogether fitting and proper that we reduce the contributions of the signal near the edges of the domain.
 
-% \begin{itemize}
-% \item A small diagram of how FT spectroscopy works at the simplest level, and a discussion of how data is collected and processed
-
-% \item What determines resolution? Range?
-
-% \item How does noise work propagate through the Fourier Transform?
-
-% \item What is the minimum sampling rate? How do we determine this rate? Nyquist Theorem and DFT 
-
-% \item Why use Hann window in Fourier Tranform?
-% \end{itemize}
-
 \section{Implementation}
 
 An optical diagram of our FTIR spectrometer is given in Figure \ref{fig:ftirdiagram}. Both the reference laser (a HeNe laser at 633 nm) and the infrared signal are fiber coupled, and enter the setup through fiber collimators which are configured to focus as far away as possible (measured against the wall of the lab roughly 5 meters away). The beams are combined on a 1400 nm long-pass filter (LPF1). Rotation mounts on the fiber collimators, the subsequent IR mirror (M1), and the LPF allow the beam paths to be combined to high precision. This alignment was performed by placing an iris in the place of the removable mirror (M5), passing the beams through it, and aligning them in the far field. Accuracy was ensured by placing a beamsplitter immediately after the iris to ensure the power passing through the iris was maximal. This alignment ensures that the angular alignment of the two beams is within $\sim 0.1\%$.
@@ -588,39 +568,95 @@ To take a scan, the frequency on the function generator which powers the speaker
 
 The data processing occurs in three steps. First, individual sweeps are separated from one another using the synchronization pulses from the function generator. Next, the samples are rebased from the time domain to the spatial domain. The zero crossing points of the reference signal are identified. The IR signal data between each zero crossing point and the next is averaged together, becoming a single data point on the new axis of spatially indexed data, where each point is separated from the next by half the reference wavelength (316.5 nm). Third and finally, this spatially indexed data is Fourier transformed using a Hann window into the spatial frequency domain. 
 
-
-
-% \begin{itemize}
-% \item Optical design of our FT spectrometer 
-
-% \item Alignment precision and contrast
-
-% \item Data collection electronics 
-
-% \item Data processing 
-% \end{itemize}
-
 \section{Characterization}
 \label{sec:characterization}
 
-In our experiment, the signal from the photodiodes is read out by a National Instruments DAQ card whose sample rate is limited to 12500 samples per second, which is lower than the bandwidth of the photodiode; thus, the maximum speed of our measurements is limited by the sample rate. The scans must be performed slow enough that the fringes of the reference laser occur at a lower frequency than the Nyquist frequency of the detector, i.e. half the sampling frequency.
+The first important characteristic of our FTIR setup is the maximum frequency at which the scans can be acquired. In our experiment, the signal from the photodiodes is read out by a National Instruments DAQ card whose sample rate is limited to 12500 samples per second, which is lower than the bandwidth of the photodiode; thus, the maximum speed of our measurements is limited by the sample rate. The scans must be performed slow enough that the fringes of the reference laser occur at a lower frequency than the Nyquist frequency of the detector, i.e. half the sampling frequency.
 
-This sets an upper bound on the scan rate. It is also worth noting that scanning slower than this rate is not advantageous. The discrete Fourier Transform (DFT) of a sine curve with frequency $\omega_{0}$, sampled at intervals of $\delta$, and with Gaussian distributed white noise $\eta(t)$, is 
+This sets an upper bound on the scan rate. By first driving the mirror as slow as possible and calculating the total displacement, the total number of fringes expected over the course of a scan was calculated. Then the mirror was driven at a frequency just low enough that at its maximum speed, the number of samples per fringe would be greater than one. This frequency was found to be $\sim 0.5$ Hz. Figure \ref{fig:reference} shows the reference signal at the fastest point in the mirrors travel, with the mirror being driven at 0.5 Hz. The number of fringes per sample is just below one, at roughly 0.85 (according to the fit). It is true, of course, that the nature of the Nyquist frequency is that higher frequency sine functions could also replicate this data; this is why we first drove the mirror well below the Nyquist frequency to calculate the rates.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=1]{RawRefSignal}
+  \caption{Raw data (black) from the reference PD, taken from the center of the scan when the mirror is moving fastest. The mean of the data has been subtracted for clarity, and a cosine has been fitted to the data (red dotted line). The frequency of the fitted cosine is a factor of 0.85 below the Nyquist frequency.}
+  \label{fig:reference}
+\end{figure}
+
+It is also worth noting that scanning slower than this determined rate of $0.5$ Hz is not advantageous. The discrete Fourier Transform (DFT) of a sine curve with frequency $\omega_{0}$, sampled at intervals of $\delta$, and with Gaussian distributed white noise $\eta(t)$, is 
 \begin{equation}\label{eq:10}
 \tilde f_{k} = \sum_{n=0}^{N-1}\left(\sin (\omega_{0}n\delta) +\eta(n\delta)\right)e^{-\frac{2\pi i}{N}nk}. 
 \end{equation}
 If we double the sampling rate, the new DFT is 
 \begin{align}
   \tilde f'_{k}
-  =& \sum_{n=0}^{2N-1}\Big(\sin(\omega_{0}n\delta/2) + \eta(\n\delta/2)\Big)e^{-\frac{2\pi i}{2N}nk}\nonumber \\
+  =& \sum_{n=0}^{2N-1}\Big(\sin(\omega_{0}n\delta/2) + \eta(n\delta/2)\Big)e^{-\frac{2\pi i}{2N}nk}\nonumber \\
   =& \sum_{n=0}^{N-1}\Big(\sin(\omega_{0}n\delta)+\eta(n\delta)\Big)e^{-\frac{2\pi i}{N}nk}\nonumber \\
   &+ \sum_{n=0}^{N-1}\Big(\sin\big(\omega_{0}(n+1/2)\delta\big) + \eta\big((n + 1/2)\delta\big) \Big)e^{-\frac{2\pi i}{N}(n+\frac{1}{2})k}.
   \label{eq:11}
 \end{align}
 After normalizing for the extra samples, we find that $f'$ is effectively the average of two completely separate scans at the original sampling frequency. The noise level thus decreases as the square root of the time taken, exactly the same as it would if several scans at the original scan rate were recorded. Thus, it is preferable to operate the scans as fast as the Nyquist frequency of the detector allows, and if averaging is necessary, to simply perform multiple independent scans rather than slow down the scan speed of a single scan. This is because the response of the speaker to being driven by the function generator becomes less reliable at lower frequencies.
 
+\begin{wrapfigure}{r}{3.2in}
+  \centering
+  \includegraphics[scale=1]{Speed}
+  \caption{Mirror displacements versus time at 0.5 Hz for two complete scans (one in each direction), with a fitted cosine.}
+  \label{fig:speed}
+\end{wrapfigure}
+
+The next important characterization is to determine how far the mirror travels, and how smoothly. Figure \ref{fig:speed} shows the distance versus time curve for an example scan at 0.5 Hz. The distance is determined as the sum of the number of zero crossings of the reference signal, times half the reference wavelength. The inversion point at $\sim 2$ seconds was determined from the synchronization pulse. The good agreement between the data and cosine fit shows that the mirror travels smoothly on the speaker. It also shows tthat the scanning speed is sufficiently low, because if we started missing zero crossings near the fastest point in the scan the fit would not agree well anymore because our distance measurements would be inaccurate.
+
+By extracting the maximum travel distance from the data in Figure \ref{fig:speed}, we find that the total beam path displacement over the course of a scan is $\sim 4.4$ mm. By equation \eqref{eq:9}, this gives us a potential frequency resolution of $\sim 2.3$ \wn[]. The frequency resolution of the array detector in its normal operating mode is $1.08 \pm 0.04$ \wn[]. This number was found by fitting Gaussian curves to the emission spectrum of the bleedthrough from the Toptica laser, as shown in Figure \ref{fig:emresolution}. Thus, for the resolution of the FTIR spectrometer to be comparable to the array detector, the travel needs to be increased by at least a factor of two.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=1]{EmissionResolution}
+  \caption{Emission spectra of the Toptica bleedthrough at four different excitation points (selected for having no fluourescence) in an MgO excitation-emission spectrum recorded using the array detector. Data (black) have been fitted with Gaussian curves (red dotted lines), and the widths of the Gaussians extracted. The average width is $1.08\pm 0.04$ \wn[.]}
+  \label{fig:emresolution}
+\end{figure}
+
+There are several potential ways to accomplish this. The first has to do with the electronics driving the speaker. The speaker has an impedance of 8 Ohms, and is rated to handle powers up to $25$ W. However, the function generator currently driving the speaker is only capable of outputting 200 mA, which corresponds to a voltage amplitude of $1.6$ V and a maximum power of only $0.32$ W. It therefore seems that we are not utilizing the full travel range of the speaker due to electronic limitations. Adding a current buffer to the output of the function generator could therefore increase the resolution of the FTIR spectrometer, potentially by up to an order of magnitude.
+
+The second is optical, and involves reflecting the output beam through the corner cube a third and fourth time. This would double the effective travel of the corner cube, and could be accomplished by a scheme like the one depicted in Figure \ref{fig:newmirrorscheme}. Essentially, a second corner cube is arranged so as to reflect the beam back into the moving corner cube, at a displaced location, so that it passes through the moving corner cube a second time before being reflected back by the D mirror. While this scheme isn't easily extended beyond one iteration, it would double the resolution of the FTIR spectrometer, bringing it up to the resolution of the array detector spectrometer. 
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.43\textwidth]{NewMirrorScheme}
+  \caption{A new corner cube mirror scheme to double the effective resolution of the spectrometer. The corner cube is being viewed head on from the perspective of the beamsplitter. The beam enters at point 1, and exits the mobile corner cube (purple) at point 2. It is then reflected off a second, stationary corner cube (orange) which faces the mobile corner cube, and is rotated so that the beam only reflects off two of the faces. The beam then reenters the mobile corner cube at point 3, and exits at point 4. It then reflects off a D-shaped mirror (mint) and returns to the beamsplitter along the same path, passing through points 4, 3, 2, and finally 1.}
+  \label{fig:newmirrorscheme}
+\end{figure}
+
+The next characterization of the FTIR spectrometer we performed was on a broad spectrum signal from an infrared LED amplified by an EDFA. The results of this experiment are depicted in Figure \ref{fig:LED}. As expected, the raw signal is strongly enveloped around the zero path length point (the slight displacement is due to imperfect calibration). The spectrum shows a wide feature (roughly 150 \wn in total). This feature, examining the detail plot in the top right, appears to consist of a wide flat feature from 6400 to 6550 \wn[], and a taller, narrower feature from roughly 6500 to 6550 \wn[.] We suspect that this odd shape has to do with the amplification of the EDFA. Next, we would have measured this same spectrum using the array detector spectrometer to confirm the accuracy of the FTIR spectrum. Unfortunately, labs were shut down before this was possible. However, these results show that the FTIR spectrometer is at least minimally capable of measuring broad spectra. 
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[height=2.5in]{LEDsignal}
+  \includegraphics[height=2.5in]{LEDspectrumzoom}
+  \includegraphics[height=2.5in]{LEDspectrum}
+  \caption{Top left: raw infrared photodiode signal for the broad spectrum LED. Bottom: complete power spectrum for the broad spectrum LED. Top right: detail plot of the boxed region in the bottom figure.}
+  \label{fig:LED}
+\end{figure}
+
+Now tested on arbitrarily narrow signal. Findings:
+SNR
+FWHM
+Accuracy
+Important to discuss that this is cheap IR PD
+Photon per second resolution?
+2.00e+14 photons per second in toptica beam
+What is proposed SNR gain with fance PD?
 
 
+\begin{figure}[t]
+  \centering
+  \includegraphics{TOPspectrum}
+  \caption{Detail plot of the only feature in the FTIR frequency spectrum of the Toptica diode laser outputting 26 $\mu$W at 6531.7 \wn[]. A Gaussian has been fitted to the peak, yielding a FWHM of $2.39 \pm 0.17$ \wn and a central frequency of $6531.7 \pm 0.2$ \wn[.] The signal to noise ratio of this signal is approximately $6.4\times 10^{9}$.}
+  \label{fig:toptica}
+\end{figure}
+
+
+
+
+  
 \begin{itemize}
 \item Resolution
 
