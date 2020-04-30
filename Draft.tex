@@ -133,10 +133,7 @@
 \begin{center}
   \textbf{Abstract}
 \end{center}
-  \noindent Large-scale quantum networks will require reliable single-photon sources for distributing entanglement over long distances. The \erbium ion is a good candidate for this purpose as it has an optically accessible transition at 1550 nm, the so-called ``telecom'' wavelength at which light propagates through optical fibers with minimal loss. However, this transition is electric-dipole forbidden and thus spontaneous emission from it is slow (around 100 Hz).
-  Such a bandwidth constraint would be crippling in a real photonic quantum system. Previously, the Thompson lab has doped \erbium ions into \YSO and coupled them to silicon nanophotonic cavities, enabling the observation of single ions and enhancing the spontaneous emission rate by a factor of 600 through the Purcell effect \cite{Dibos2018}.
-  However, the bulk-doped \ErYSO system has two flaws. One is that \YSO has strong nuclear spins which limit the  $T_{1}$ and $T_{2}$ spin coherence times of the \erbium ions. The other is that the lower bound on the density of \erbium possible through the bulk-doping process is still too high for individual \erbium ions to be addressed optically.
-  These issues have motivated a search for new host crystals which can be doped with \erbium through ion implantation, hopefully resulting in substantially lower concentrations of \erbium ions than would be possible through bulk doping. In this work, we characterize the spectral properties of \erbium implanted in a promising new host crystal, and discuss new techniques for improving the resolution of future such measurements.
+  \noindent Large-scale quantum networks will require reliable single-photon sources for distributing entanglement over long distances. The \erbium ion is a good candidate for this purpose as it has an optically accessible transition at 1550 nm, the so-called ``telecom'' wavelength at which light propagates through optical fibers with minimal loss. However, this transition is electric-dipole forbidden, and so spontaneous emission from it is slow (around 100 Hz). Such a bandwidth constraint would be crippling in a real photonic quantum system. Previously, the Thompson lab has doped \erbium ions into \YSO and coupled them to silicon nanophotonic cavities, enabling the observation of single ions and enhancing the spontaneous emission rate by a factor of 600 through the Purcell effect \cite{Dibos2018}. However, the bulk-doped \ErYSO system has two flaws. One is that \YSO has strong nuclear spins which limit the  $T_{1}$ and $T_{2}$ spin coherence times of the \erbium ions. The other is that the lower bound on the density of \erbium possible through the bulk-doping process is still too high for individual \erbium ions to be addressed optically. These issues have motivated a search for new host crystals which can be doped with \erbium through ion implantation, hopefully resulting in substantially lower concentrations of \erbium ions than would be possible through bulk doping. In this work, we characterize the spectral properties of \erbium implanted in the promising new host crystal MgO, and discuss new techniques for improving the resolution of future such measurements.
   
 \vspace*{\fill}
 \begin{center}
@@ -410,7 +407,7 @@ A few idiosyncracies are important to note for some of these sites. The $Z_{5}$ 
     5-8 & * & * & * & * \\
     \hline
   \end{tabular}
-  \caption{Experimentally determined energy levels of MgO for all visible sites. Transitions not observed are marked with an asterisk. The level $Z_{5}$ in Site 1 is not directly observed, and thus marked with parentheses. The numbering of the $Z$ levels for Site 3 is somewhat uncertain (see the discussion in Section \ref{sec:linewidths-shapes}).}
+  \caption{Experimentally determined energy levels of MgO for all visible sites. Transitions not observed are marked with an asterisk. The level $Z_{5}$ in Site 1 is not directly observed, and thus marked with parentheses. The numbering of the $Z$ levels for Site 3 is somewhat uncertain (see the discussion in Section \ref{sec:linewidths-shapes}), and so these levels are also marked with parentheses.}
   \label{tab:mgolevels}
 \end{table}
 
@@ -765,10 +762,25 @@ Despite the further testing required, FTIR spectroscopy shows substantial promis
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newpage
+\makeatletter
+\patchcmd{\chaptermark}{\@chapapp\ }{}{}{}
+\makeatother
+\fancyhead{}
+\fancyhead[RO,LE]{\nouppercase{\leftmark}} % section number + title
 \chapter{Conclusions}
 
-In this work, we have presented the current status of the spectroscopic characterization of MgO, a promising new host crystal for implanted \erbium ions. 
+
+In this work, we have presented the current status of the spectroscopic characterization of MgO, a promising new host crystal for implanted \erbium ions. \erbium ions appear to occupy at least four spectrally distinct site in the MgO crystal structure, several of which feature inhomogeneous linewidths narrower than we could observe at 13 K (the lowest temperature allowed by the leak in the cryostat). These narrow inhomoegeneous linewidths are desirable for single-ion applications, as the Purcell enhancement from coupled photonic crystal cavities is highly frequency-dependent. Spectral drift due to inhomoegenous broadening would thus substantially affect the performance of quantum devices using this system.
+
+MgO is also desirable because it does not have nuclear spins. In \YSO[], the nuclear spins substantially reduced the spin coherence times of the optical \erbium electrons. We therefore believe that \erbium in MgO will feature much longer coherence times, although we have not yet been able to test this hypothesis.
+
+Two factors limited our characterization of \erbium in MgO. The first was the leak in the cryostat, which prevented measurements at temperatures below 13 K. We were thus unable to measure the inhomogeneous linewidths of \erbium at several sites in MgO, as the homogeneous broadening was dominant at 13 K. The second factor was the signal to noise ratio of the emission detector, which prevented us from observing emission at many $Y_{1}Z_{n}$ transitions, particuarly in Site 3 (see Table \ref{tab:mgolevels}). Without observing more of these transitions, it will be difficult to completely determine the crystal field environment of Site 3, which is the brightest site and the one with the highest apparent symmetry.
+
+A new cryostat is on the way, to resolve the first limitation. Towards the end of increasing the signal to noise ratio of the emission spectrometer, we have begun developing a low-cost, high-resolution Fourier transform infrared spectrometer based on a corner cube mirror mounted to a speaker cone. We have achieved proof-of-concept demonstrations on both broad- and narrow-spectrum infrared test sources. Our FTIR spectrometer is accurate, and can measure a range of frequencies much broader than the array detector spectrometer. Its resolution is currently roughly half as good as the array detector spectrometer. However, there is a clear path forward to increase its resolution, and we are optimistic that it will ultimately have a higher resolution than the array detector spectrometer. Its signal-to-noise ratio using an ordinary amplified InGaAs photodiode seems to be roughly one order of magnitude worse than the array detector spectrometer. Since the special low-noise photodiode we ultimately plan to use has a signal to noise ratio several orders of magnitude better than the InGaAs photodiode, we believe that the FTIR spectrometer will ultimately be able to observe signals orders of magnitude smaller than the array detector spectrometer.
+
+So the end of all our exploring is, indeed, to arrive back where we started, and to know the place for the first time. We believe that single \erbium ions implanted in solid-state hosts and coupled to photonic crystal cavities are a promising technology for telecom-wavelength quantum network applications. \erbium in \YSO suffered shortened coherence times due to nuclear spins in the crystal, and \erbium in \TiO suffered from poor cavity quality factors due to imperfect transparency in the crystal. MgO is a promising new alternative, featuring narrow optical linewidths and none of the problems of previous systems. We have presented here an initial spectroscopic characterization of \erbium in MgO, and outlined the next steps in this investigation. We have also presented a proof-of-concept for a new low-noise FTIR spectrometer to assist in this study, and the study of other new potential host crystals.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -784,9 +796,23 @@ In this work, we have presented the current status of the spectroscopic characte
 \bibliography{thesis}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \newpage
 \addcontentsline{toc}{chapter}{Acknowledgements}
+\fancyhead{}
+\fancyhead[RO,LE]{Acknowledgements}
 \chapter*{Acknowledgements}
+\doublespacing
+I hardly know where to start thanking people. Thank you to Jeff, who has been an amazing advisor over the last two years, with respect to both science and life. His advice and assistance has been an essential part of me being able to continue on in physics next year. Moreover, the wonderful experiences I've had working in his lab have been essential to me feeling like I actually \emph{want} to continue in physics. Both of the projects I've worked on with him have been really well designed and interesting, and I've always felt like my contributions to the group genuinely matter.
+
+Of course, I can't say anything about the good experiences I've had in the Thompson lab without thanking everyone else who helped make those experience what they are. Paul has been unbelievably helpful and patient with me this year, even when I have somewhat bungled things. This project would not be even remotely what it is without him. I have always loved running into Mouktik at ungodly hours of the night and chatting about all sorts of things. It was Mouktik, I remember, who was around late one night in December 2018 when I first measured a PLE signal from \erbium in YSO, which is now a moment I look back on with enormous fondness and pride. Jack and Sam are a lot of fun to work with, and always made me feel like part of the group whenver I saw them. I wish I'd had a chance to get to know them better! Salim has also been really nice, and it was great of him to show me around the clean room. I also have to thank the countless people from the Thompson and de Leon group who have always dropped everything to help me with anything I needed: Songtao, Alex, Ding, Zihuai, Peace, Brendon, Sacha, Lila, and more.
+
+And, of course, I want to thank Chris for everything. He has been a fantastic mentor, a wonderful person to work with, and a friend. Even when he's exhausted and has a ton of his own work, he has taken the time to explain things to me, and I think I've learned as much physics from him as I have from some classes. He has gone out of his way to help me with my life, proofreading drafts of my JP, answering questions about my thesis, and even giving me comments on grad school and NSF applications. It was also really sweet of him to give me the Thorlabs mug. I had wanted one ever since I first saw them, and this may be silly but it really made me feel like part of the community.
+
+Many people never find a great advisor to work with. In this regard, I have been unreasonably lucky, because I have had not just one, but several. I got my start in the Shaevitz lab. Josh Shaevitz was always inspiring, and Sagar and Guannan were both really nice. I had the wonderful opportunity to study with Norbert Schuch at the Max-Planck Institute for Quantum Optics in Garching bei M\"unchen, where Mohsin was a good mentor and I met some kind people (like Caroline and Zhi-Yuan). David Huse was a fantastic mentor; I loved the project we worked on, and our meetings were always a pleasure. And of course, my experience in the Kwiat lab was a pivotal moment in my life. Paul Kwiat is a fantastic person and PI, and I have him to thank in no small part for any successes I may have had so far in life.
+
+I've also had a number of wonderful non-research mentors over the years, all of whom have helped make me who I am. In particular, I want to thank Frau, Beuschlein, Mr. Davis, Mr. Hicks, Ruth Ochs, and especially my wonderful teachers Karen and Jo-Ann.
+
 
 
 
