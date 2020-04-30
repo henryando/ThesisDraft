@@ -1,14 +1,6 @@
-\documentclass[12pt]{puthesis}
+\documentclass[12pt]{report}
 %\documentclass[12pt,lot, lof, singlespace]{puthesis}
 %\newcommand{\printmode}{}
-
-% Front page materials
-\title{Spectroscopic Characterization of New Er$^{3+}$ Host Crystals for Quantum Network Applications}
-\submitted{May 2020}  
-\copyrightyear{May 2020}  
-\author{Henry Allen Ando}
-\adviser{Professor Jeff D. Thompson}  
-\department{Physics}
 
 % Import packages
 \usepackage{graphicx}
@@ -37,6 +29,8 @@
 \usepackage{adjustbox}
 \usepackage{physics}
 \usepackage{rotating}
+\usepackage{etoolbox}
+\usepackage{changepage}
 \setlength{\LTcapwidth}{\textwidth}
 
 % Set page geometry options
@@ -44,7 +38,21 @@
 \usepackage[margin=1in]{geometry}
 \setlength\parindent{28pt}
 \usepackage{setspace}
-\onehalfspacing
+\doublespacing
+
+% Produce images?
+\newtoggle{imgs}
+% \toggletrue{imgs}
+\togglefalse{imgs}
+
+% Define the content to go in the header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{\nouppercase{\rightmark}} % section number + title
+% \fancyfoot{}
+% \fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
 
 % Define functions
 \newcommand{\erbium}[1][ ]{Er$^{3+}$#1}
@@ -55,6 +63,7 @@
 \graphicspath{{Figures/}}
 \newcommand{\notetoself}[1]{\textcolor{red}{#1}}
 \newcommand{\wn}[1][ ]{cm$^{-1}$#1}
+\renewcommand{\bibname}{References}
 
 % Tweak float placements
 \renewcommand{\topfraction}{0.85}  % max fraction of floats at top
@@ -68,42 +77,85 @@
 \renewcommand{\floatpagefraction}{0.66}	 % require fuller float pages
 \renewcommand{\dblfloatpagefraction}{0.66}  % require fuller float pages
 
-% Printed vs. online formatting
-\ifdefined\printmode
-\usepackage{url}
-\else
-\ifdefined\proquestmode
-\hypersetup{bookmarksnumbered}
-\makeatletter
-\hypersetup{pdftitle=\@title,pdfauthor=\@author}
-\makeatother
-\else
-\hypersetup{colorlinks,bookmarksnumbered}
-\makeatletter
-\hypersetup{pdftitle=\@title,pdfauthor=\@author}
-\makeatother
-\fi % proquest or online formatting
-\fi % printed or online formatting
-
-% Enable or disable front matter
-\ifodd 1
-\renewcommand*{\makecopyrightpage}{}
-\renewcommand*{\makeabstract}{}
-% \renewcommand{\maketitlepage}{}
-\else
-\abstract{\input{abstract}}
-\acknowledgements{\input{acknowledgements}}
-\dedication{To my parents.}
-\fi
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\makefrontmatter
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\begin{titlepage}
+  \singlespacing
+  \begin{center}
+    \vspace*{5mm}
+    \Large{\textbf{Spectroscopic Characterization of New \erbium Host Crystals for Quantum Network Applications}}
+    
+    \vspace{0.5cm}
+    
+    \Large{Henry Ando}
+    
+    \vfill
+    \includegraphics[height=2in]{Figures/Princeton.png}
+    \vfill
+    
+    \normalsize{A thesis presented in partial fulfillment of the\\requirements for the degree of Bachelor of Arts (A.B.).}
+    
+    \vspace{0.8cm}
+    
+    \normalsize{Advised by Professor Jeff D. Thompson} \\
+    \normalsize{Second Reader: Professor Waseem Bakr}
+    
+    \vspace{0.8cm}
+    
+    \normalsize{Department of Physics\\
+      Princeton University\\
+      Princeton, NJ\\
+      2019-2020}
+  \end{center}
+\end{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{1in}
+\begin{flushright}
+  To my family and friends.
+\end{flushright}
+\clearpage
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\addcontentsline{toc}{chapter}{Abstract}
+\onehalfspacing
+\vspace*{1cm}
+\begin{center}
+  \textbf{Abstract}
+\end{center}
+  \noindent Large-scale quantum networks will require reliable single-photon sources for distributing entanglement over long distances. The \erbium ion is a good candidate for this purpose as it has an optically accessible transition at 1550 nm, the so-called ``telecom'' wavelength at which light propagates through optical fibers with minimal loss. However, this transition is electric-dipole forbidden and thus spontaneous emission from it is slow (around 100 Hz).
+  Such a bandwidth constraint would be crippling in a real photonic quantum system. Previously, the Thompson lab has doped \erbium ions into \YSO and coupled them to silicon nanophotonic cavities, enabling the observation of single ions and enhancing the spontaneous emission rate by a factor of 600 through the Purcell effect \cite{Dibos2018}.
+  However, the bulk-doped \ErYSO system has two flaws. One is that \YSO has strong nuclear spins which limit the  $T_{1}$ and $T_{2}$ spin coherence times of the \erbium ions. The other is that the lower bound on the density of \erbium possible through the bulk-doping process is still too high for individual \erbium ions to be addressed optically.
+  These issues have motivated a search for new host crystals which can be doped with \erbium through ion implantation, hopefully resulting in substantially lower concentrations of \erbium ions than would be possible through bulk doping. In this work, we characterize the spectral properties of \erbium implanted in a promising new host crystal, and discuss new techniques for improving the resolution of future such measurements.
+  
+\vspace*{\fill}
+\begin{center}
+  This paper represents my own work in accordance with University regulations.\\
+  \includegraphics[width=2in]{Signature}
+\end{center}
+\vspace*{\fill}
+\clearpage
+\newpage
+\doublespacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Introduction}
+\pagenumbering{arabic}
+\setcounter{page}{1}
 \section{A Brief History of Quantum Computing}
 \label{sec:brief-hist-quant}
 
@@ -113,17 +165,15 @@ As the theory developed throughout the 1990's, theorists began to discover probl
 
 But while quantum computers threaten to break classical factorization-based encryption methods, they create in exchange the possibility for physically un-interceptible encrypted communication. The oldest and most famous of these so-called \emph{quantum cryptography} schemes is the BB84 protocol for quantum key distribution. This protocol, which encodes information in the polarization states of photons, enables one party to send a private key to another in such a way that any attempt to intercept the message would be detectable to the receiver \cite{Bennett2014,Shor2000}. Another uniquely quantum communication procedure is \emph{teleportation}. In quantum teleportation, a qubit is transmitted from one party to another instantaneously across arbitrarily large distances. This doesn't violate the lightspeed limit for the transfer of information, because a qubit isn't information, and because the protocol requires a classical bit to be exchanged beforehand anyway \cite{Bennett1993}. 
 
-% \notetoself{Here is a potential spot to talk about error correction. However, I'm not sure it's worth the space/time. For the moment, I'll leave only this reminder.}
-
 So far, the theory of quantum algorithms and protocols has ranged far ahead of the ability to physically implement them. Over the years, a few broad classes of physical quantum computers have emerged as the most studied, each for slightly different types of problems. A few of these classes are:
 \newcommand{\listheader}[1]{\textbf{#1}}
 \begin{itemize}
   
-\item \listheader{Trapped ion quantum computers} use the electronic spins of ions trapped in an optical lattice as the qubit \cite{Cirac1995}. Alternatively, trapped neutral atoms can be used, with nuclear spins as the qubits \notetoself{[?]}. The dipole-dipole interactions between adjacent particles can be tuned to perform two-qubit gates, thus making atom trap quantum computers a viable platform for a universal quantum computer \notetoself{[?]}.
+\item \listheader{Trapped ion quantum computers} use the electronic spins of ions trapped in an optical lattice as the qubit \cite{Cirac1995}. Alternatively, trapped neutral atoms can be used, with nuclear spins as the qubits \cite{Saskin2019}. The dipole-dipole interactions between adjacent particles can be tuned to perform two-qubit gates, thus making atom trap quantum computers a viable platform for a universal quantum computer.
   
 \item \listheader{Nuclear magnetic resonance (NMR) quantum computers} use the nuclear spins of atoms or molecules dissolved in solution as the qubit \cite{Cory1997}. Unfortunately, it was shown after a few seemingly successful bulk NMR demonstrations that no entanglement had actually occurred in these experiments, and that entangelement is a necessary part of most important quantum algorithms \cite{Braunstein1999,Linden2001}. It was also hard to scale these computers, as each extra qubit required the synthesis of a new molecule. However, the legacy of NMR computers lives on, as many current quantum computing schemes (see the next list item) make use of the main ideas of NMR computers.
   
-\item \listheader{Point defects in solid state hosts} such as rare earth ions or nitrogen-vacancy (NV) centers in crystals are in some sense descendents of NMR-based quantum computing paradigms \notetoself{[?]}. In these systems, the spin states of valence electrons serve as qubits. Light-matter interfaces can be achieved by coupling these atoms with photons at the same energy as an optical transition in the qubit atom \notetoself{[?]}. 
+\item \listheader{Point defects in solid state hosts} such as rare earth ions or nitrogen-vacancy (NV) centers in crystals are in some sense descendents of NMR-based quantum computing paradigms \cite{Rose2018,Zhong2015}. In these systems, the spin states of valence electrons serve as qubits. Light-matter interfaces can be achieved by coupling these atoms with photons at the same energy as an optical transition in the qubit atom \cite{Togan2010,Bernien2013,Greve2012}. 
 
 \item \listheader{Linear optical quantum computers} use the polarization states of photons as qubits \cite{Knill2001}. The main advantage of this paradigm is that it enables easy transfer of qubits over long distance, because the computational qubits can be sent directly over long distances, either through fiber optic cables or through free space telescopes, with no extra conversion step. 
     
@@ -143,7 +193,9 @@ This transition, however, is very slow, with a natural linewidth on the order of
 
 \begin{figure}[b]
   \centering
-  \includegraphics[width=0.8\textwidth]{Nanophotonics}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.8\textwidth]{Nanophotonics}
+  }{}
   \caption{A lensed fiber couples into a silicon photonic cavity stamped on top of an \erbium[]-doped \YSO crystal. Red arrows represent the spins of \erbium ions in the crystal substrate. Figure from \cite{Dibos2018}.}
   \label{fig:cavity}
 \end{figure}
@@ -162,7 +214,9 @@ Due to its telecom optical transition, \erbium has a long history of use as a do
 
 \begin{wrapfigure}{r}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.48\textwidth]{EnergyLevelDiagram}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.48\textwidth]{EnergyLevelDiagram}
+  }{}
   \caption{Diagram showing the Stark splitting due to electric fields within the crystal (blue) and the Zeeman splitting in an applied magnetic field (green). The transition between the lowest ground and excited state levels, labelled in red, typically falls around 1530 nm.}
   \label{fig:energyleveldiagram}
 \end{wrapfigure}
@@ -242,12 +296,14 @@ However, the relative strengths of these peaks are modulated by several factors.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.9\textwidth]{PLESetupDiagram.pdf}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.9\textwidth]{PLESetupDiagram.pdf}
+  }{}
   \caption{Schematic of our spectroscopy experiment. A half-wave plate is marked in blue, and a dichroic mirror is marked in green. }
   \label{fig:ple}
 \end{figure}
 
-Our PLE setup is shown in Figure \ref{fig:ple}. A tunable diode laser is amplified by an erbium-doped fiber amplifier up to \notetoself{200 mW?}. The laser is then passed through a chopper. A half-wave plate (blue) at the output of the fiber enables coarse control over the polarization of the laser before it passes through a polarizing beamsplitter. A photodiode measures the light rejected by the PBS, informing the rotation of the HWP. The laser then passes through a beam expander consisting of two lenses, before reflecting off a PBS towards the vapor cryostat containing the sample. Before the cryostat the laser passes through a lens which focuses it onto the sample surface. A camera, which is added to the beam path with a dichroic (green), helps aim the laser at the sample.
+Our PLE setup is shown in Figure \ref{fig:ple}. A tunable diode laser is amplified by an erbium-doped fiber amplifier up to 200 mW. The laser is then passed through a chopper. A half-wave plate (blue) at the output of the fiber enables coarse control over the polarization of the laser before it passes through a polarizing beamsplitter. A photodiode measures the light rejected by the PBS, informing the rotation of the HWP. The laser then passes through a beam expander consisting of two lenses, before reflecting off a PBS towards the vapor cryostat containing the sample. Before the cryostat the laser passes through a lens which focuses it onto the sample surface. A camera, which is added to the beam path with a dichroic (green), helps aim the laser at the sample.
 
 The reflected excitation laser is mostly rejected from continuing down the measurement beampath by virtue of the PBS. Fluorescence from the sample, which has random polarization, makes it through this PBS with 50\% attenuation. The measurement beampath is then directed either to a low-noise photodiode, or to the array detector spectrometer, by inserting or removing a mirror (dotted line). Before measurement, the light passes through a second chopper set to be exactly out of phase with the first, so that residual excitation light is further rejected.\footnote{Since the excitated state lifetime of the \erbium ions is on the order of ms, fluorescent emission continues to be visible for several ms after the excitation laser is blocked.}
 
@@ -273,9 +329,11 @@ The processing of 2D spectra consists of several steps. First, a moving window s
 
 \begin{figure}[b]
   \centering
-  \includegraphics[width=0.47\textwidth]{PeakFinding}
-  \hfill
-  \includegraphics[width=0.47\textwidth]{LineSorting}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.47\textwidth]{PeakFinding}
+    \hfill
+    \includegraphics[width=0.47\textwidth]{LineSorting}
+  }{}
   \caption{Left: a screenshot of peak sorting. Red dots are all potential peaks, green dots are the ones that have been manually selected as belonging to physical features. Right: a screenshot of grouping excitation lines into different sites. In the given figure, all lines belong to the same site.}
   \label{fig:manual}
 \end{figure}
@@ -296,13 +354,15 @@ Once the real peaks are identified, they are sorted into different sites. This i
 
 \begin{figure}[t]
   \centering
-  \includegraphics[scale=1]{JinD_spectrum_13K}
+  \iftoggle{imgs}{
+    \includegraphics[scale=1]{JinD_spectrum_13K}
+  }
   \caption{Excitation-emission spectrum of MgO at 13K.}
   \label{fig:mgospectrum}
 \end{figure}
 
 \subsection{Sample preparation}
-Implanted with $10^{19}$ dose \notetoself{find out units on this}. Unannealed.
+Implanted with $10^{19}$ ion dose. Unannealed.
 
 \subsection{Structure}
 Magnesium oxide (MgO) is a cubic lattice consisting of O$^{2-}$ ions and Mg$^{2+}$ ions held together by ionic bonding. There are three sites with cubic symmetry: the two substitutional sites have cubic symmetry, as does the interstitial site in the center of the cube. Because the crystal must remain net neutral, there might be some restructuring of the surrounding environment to compensate the introduction of the additional positive charge from the implanted \erbium ion. This may disturb the symmetries of the crystal.
@@ -315,7 +375,9 @@ Our energy level assignments are also supported by the temperature-dependent dat
 
 \begin{wrapfigure}{r}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.48\textwidth]{Site2Multiplicity}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.48\textwidth]{Site2Multiplicity}
+  }{}
   \caption{Detail plot of Site 2 side bands in the MgO excitation-emission spectrum at 13K.}
   \label{fig:site2sidebands}
 \end{wrapfigure}
@@ -415,8 +477,10 @@ In general, the data were matched extremely well by one of these two distributio
 
 \begin{figure}[b]
   \centering
-  \includegraphics[width=0.48\textwidth]{Site3_y1}
-  \includegraphics[width=0.48\textwidth]{Site3_y2}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.48\textwidth]{Site3_y1}
+    \includegraphics[width=0.48\textwidth]{Site3_y2}
+  }{}
   \caption{Excitation peaks at $Z_1Y_1$ (left) and $Z_1Y_2$ (right) in Site 3. The intensity profile discussed in Equation \eqref{eq:1} is fitted to the $Z_{1}Y_{2}$ data. Fitted model parameters are: $a_{1} = 2.3$, $\Delta_{1} = 0.05$, $\Gamma_{1} = 0.28$, $a_{2} = 1.6$, $\Delta_{2} = -0.05$, $\Gamma_{2} = 0.28$, $\Gamma_{3} = 0.0025$, $b = 0.12$}
   \label{fig:site3peaks}
 \end{figure}
@@ -456,50 +520,60 @@ MgO is therefore a very exciting potential host crystal. It has no nuclear spins
 
 \begin{figure}[b]
   \centering
-  \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
-  \includegraphics[scale=0.97]{JinD_site1_32K}\\
-  \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
-  \includegraphics[scale=0.97]{JinD_site1_106K}
+  \iftoggle{imgs}{
+    \includegraphics[scale=0.97]{JinD_site1_13K}\hfill
+    \includegraphics[scale=0.97]{JinD_site1_32K}\\
+    \includegraphics[scale=0.97]{JinD_site1_60K}\hfill
+    \includegraphics[scale=0.97]{JinD_site1_106K}
+  }{}
   \caption{Transition assignments for excitation-emission spectra of MgO for Site 1 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
   \label{fig:mgosite1}
 \end{figure}
 
 \begin{figure}[b]
   \centering
-  \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
-  \includegraphics[scale=0.97]{JinD_site2_32K}\\
-  \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
-  \includegraphics[scale=0.97]{JinD_site2_106K}
+  \iftoggle{imgs}{
+    \includegraphics[scale=0.97]{JinD_site2_13K}\hfill
+    \includegraphics[scale=0.97]{JinD_site2_32K}\\
+    \includegraphics[scale=0.97]{JinD_site2_60K}\hfill
+    \includegraphics[scale=0.97]{JinD_site2_106K}
+  }{}
   \caption{Transition assignments for excitation-emission spectra of MgO for Site 2 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
   \label{fig:mgosite2}
 \end{figure}
 
 \begin{figure}[b]
   \centering
-  \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
-  \includegraphics[scale=0.97]{JinD_site3_32K}\\
-  \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
-  \includegraphics[scale=0.97]{JinD_site3_106K}
+  \iftoggle{imgs}{
+    \includegraphics[scale=0.97]{JinD_site3_13K}\hfill
+    \includegraphics[scale=0.97]{JinD_site3_32K}\\
+    \includegraphics[scale=0.97]{JinD_site3_60K}\hfill
+    \includegraphics[scale=0.97]{JinD_site3_106K}
+  }{}
   \caption{Transition assignments for excitation-emission spectra of MgO for Site 3 at 13, 32, 60, and 106K respectively. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures. Emission lines for which no level assignment can be determined are plotted in yellow.}
   \label{fig:mgosite3}
 \end{figure}
 
 \begin{figure}[b]
   \centering
+  \iftoggle{imgs}{
   \includegraphics[scale=0.97]{JinD_site4_13K}\hfill
   \includegraphics[scale=0.97]{JinD_site4_32K}\\
   \includegraphics[scale=0.97]{JinD_site4_60K}\hfill
   \includegraphics[scale=0.97]{JinD_site4_106K}
+  }{}
   \caption{Transition assignments for excitation-emission spectra of MgO for Site 4 at 13, 32, 60, and 106K respectively. No data exists for $Z_{1}Y_{1}$ at 13K, so this line is dotted in that figure. All observed peaks are marked. Green lines correspond to excitation (emission) from $Z_{1}$ ($Y_{1}$), magenta lines correspond to origin states that thermally occupy at higher temperatures.}
   \label{fig:mgosite4}
 \end{figure}
 
 \begin{figure}[t]
   \centering
-  \includegraphics[scale=0.75]{JinD_site1_temp}
-  \includegraphics[scale=0.75]{JinD_site2_temp}
-  \includegraphics[scale=0.75]{JinD_site3_temp}
-  \includegraphics[scale=0.75]{JinD_site4_temp}
+  \iftoggle{imgs}{
+    \includegraphics[scale=0.75]{JinD_site1_temp}
+    \includegraphics[scale=0.75]{JinD_site2_temp}
+    \includegraphics[scale=0.75]{JinD_site3_temp}
+    \includegraphics[scale=0.75]{JinD_site4_temp}
+  }{}
   \caption{Temperature dependence of emission spectrum in MgO, excited at $Z_{1}Y_{1}$, for Sites 1, 2, 3, and 4, from top to bottom. Each peak is labeled with its corresponding emission transition.}
   \label{fig:mgotemp}
 \end{figure}
@@ -511,7 +585,7 @@ MgO is therefore a very exciting potential host crystal. It has no nuclear spins
 
 \section{Motivation}
 
-The array-detector-based emission spectrometer greatly sped up the acquisition of excitation-emission spectra. However, it has two primary limitations which impose constraints on our measurements. One is the resolution. The detector has \notetoself{1024} bins, which sets the resolution on a 100 nm wide scan to only 0.1 nm, which is often not enough for our purposes. Furthermore, increasing the resolution by decreasing the width of the slit attenuates the signal, further lowering the signal to noise ratio.
+The array-detector-based emission spectrometer greatly sped up the acquisition of excitation-emission spectra. However, it has two primary limitations which impose constraints on our measurements. One is the resolution. The detector has 1024 bins, which sets the resolution on a 100 nm wide scan to only 0.1 nm, which is often not enough for our purposes. Furthermore, increasing the resolution by decreasing the width of the slit attenuates the signal, further lowering the signal to noise ratio.
 
 The other limitation is the signal to noise ratio itself, which is not high enough for us to see all the peaks we might be able to see with a less noisy detection scheme. For the array detector, there are three main sources of noise. One is the readout noise of the detectors, which contributes roughly 700 counts per bin per readout operation and thus a constant noise level of roughly 25 counts per bin per readout. Another is leakage, both from the room and from the excitation light, which cannot be completely filtered out of the detector. And the third is dark counts in the detector, which correspond to the black box thermal photons inside the detector. Because of the readout noise, you can improve your measurement somewhat by acquiring data for a longer time; however, due to the dark counts and bleedthrough which occur at a constant rate in time, the signal to noise ratio eventually begins to plateau and your measurement stops improving substantially with longer acquisition times. Furthermore, the bins fill up after roughly 7000 counts, putting a further limit on the maximum acquisition time per readout.
 
@@ -521,7 +595,9 @@ The signal to noise ratio on the low-noise photodiode used for PLE is better tha
 
 \begin{wrapfigure}{r}{0.3\textwidth}
   \centering
-  \includegraphics[width=0.23\textwidth]{FTIRMainIdea}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.23\textwidth]{FTIRMainIdea}
+  }{}
   \caption{A Fourier transform spectrometer.}
   \label{fig:ftirmainidea}
 \end{wrapfigure}
@@ -548,7 +624,9 @@ An optical diagram of our FTIR spectrometer is given in Figure \ref{fig:ftirdiag
 
 \begin{figure}[b]
   \centering
-  \includegraphics[width=\textwidth]{FTIRSetupDiagram}
+  \iftoggle{imgs}{
+    \includegraphics[width=\textwidth]{FTIRSetupDiagram}
+  }{}
   \caption{The optical design of our FTIR spectrometry setup. 1400 nm long-pass filters are marked in blue. A removable mirror is marked by a dotted line; when the mirror is taken out, the beams travel 3 meters to an alignment mark in the far field. }
   \label{fig:ftirdiagram}
 \end{figure}
@@ -574,7 +652,9 @@ This sets an upper bound on the scan rate. By first driving the mirror as slow a
 
 \begin{figure}[t]
   \centering
-  \includegraphics[scale=1]{RawRefSignal}
+  \iftoggle{imgs}{
+    \includegraphics[scale=1]{RawRefSignal}
+  }{}
   \caption{Raw data (black) from the reference PD, taken from the center of the scan when the mirror is moving fastest. The mean of the data has been subtracted for clarity, and a cosine has been fitted to the data (red dotted line). The frequency of the fitted cosine is a factor of 0.85 below the Nyquist frequency.}
   \label{fig:reference}
 \end{figure}
@@ -595,7 +675,9 @@ After normalizing for the extra samples, we find that $f'$ is effectively the av
 
 \begin{wrapfigure}{r}{3.2in}
   \centering
-  \includegraphics[scale=1]{Speed}
+  \iftoggle{imgs}{
+    \includegraphics[scale=1]{Speed}
+  }{}
   \caption{Mirror displacements versus time at 0.5 Hz for two complete scans (one in each direction), with a fitted cosine.}
   \label{fig:speed}
 \end{wrapfigure}
@@ -606,7 +688,9 @@ By extracting the maximum travel distance from the data in Figure \ref{fig:speed
 
 \begin{figure}[t]
   \centering
-  \includegraphics[scale=1]{EmissionResolution}
+  \iftoggle{imgs}{
+    \includegraphics[scale=1]{EmissionResolution}
+  }{}
   \caption{Emission spectra of the Toptica bleedthrough at four different excitation points (selected for having no fluourescence) in an MgO excitation-emission spectrum recorded using the array detector. Data (black) have been fitted with Gaussian curves (red dotted lines), and the widths of the Gaussians extracted. The average width is $1.08\pm 0.04$ \wn[.]}
   \label{fig:emresolution}
 \end{figure}
@@ -617,7 +701,9 @@ The second is optical, and involves reflecting the output beam through the corne
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.43\textwidth]{NewMirrorScheme}
+  \iftoggle{imgs}{
+    \includegraphics[width=0.43\textwidth]{NewMirrorScheme}
+  }{}
   \caption{A new corner cube mirror scheme to double the effective resolution of the spectrometer. The corner cube is being viewed head on from the perspective of the beamsplitter. The beam enters at point 1, and exits the mobile corner cube (purple) at point 2. It is then reflected off a second, stationary corner cube (orange) which faces the mobile corner cube, and is rotated so that the beam only reflects off two of the faces. The beam then reenters the mobile corner cube at point 3, and exits at point 4. It then reflects off a D-shaped mirror (mint) and returns to the beamsplitter along the same path, passing through points 4, 3, 2, and finally 1.}
   \label{fig:newmirrorscheme}
 \end{figure}
@@ -626,9 +712,11 @@ The next characterization of the FTIR spectrometer we performed was on a broad s
 
 \begin{figure}[t]
   \centering
-  \includegraphics[height=2.5in]{LEDsignal}
-  \includegraphics[height=2.5in]{LEDspectrumzoom}
-  \includegraphics[height=2.5in]{LEDspectrum}
+  \iftoggle{imgs}{
+    \includegraphics[height=2.5in]{LEDsignal}
+    \includegraphics[height=2.5in]{LEDspectrumzoom}
+    \includegraphics[height=2.5in]{LEDspectrum}
+  }{}
   \caption{Top left: raw infrared photodiode signal for the broad spectrum LED. Bottom: complete power spectrum for the broad spectrum LED. Top right: detail plot of the boxed region in the bottom figure.}
   \label{fig:LED}
 \end{figure}
@@ -637,7 +725,9 @@ Next, we tested the FTIR spectrometer on a stable, narrow linewidth laser signal
 
 \begin{figure}[t]
   \centering
-  \includegraphics{TOPspectrum}
+  \iftoggle{imgs}{
+    \includegraphics{TOPspectrum}
+  }{}
   \caption{Detail plot of the only feature in the FTIR frequency spectrum of the Toptica diode laser outputting 26 $\mu$W at 6531.7 \wn[]. A Gaussian has been fitted to the peak, yielding a FWHM of $2.39 \pm 0.17$ \wn and a central frequency of $6531.7 \pm 0.2$ \wn[.] The signal to noise ratio of this signal is approximately $6.4\times 10^{9}$.}
   \label{fig:toptica}
 \end{figure}
@@ -678,11 +768,11 @@ Despite the further testing required, FTIR spectroscopy shows substantial promis
 
 \chapter{Conclusions}
 
-
+In this work, we have presented the current status of the spectroscopic characterization of MgO, a promising new host crystal for implanted \erbium ions. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\renewcommand{\bibname}{References}
 \singlespacing
 \bibliographystyle{prsty}
 \cleardoublepage
@@ -690,7 +780,14 @@ Despite the further testing required, FTIR spectroscopy shows substantial promis
   \phantomsection  % makes hyperref recognize this section properly for pdf link
 \else
 \fi
-\addcontentsline{toc}{chapter}{Bibliography}
+\addcontentsline{toc}{chapter}{References}
 \bibliography{thesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\chapter*{Acknowledgements}
+
+
 
 \end{document}
